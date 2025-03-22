@@ -1,0 +1,254 @@
+{% extends 'layouts/app.html' %}
+
+{% block title %}System Settings{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom_v1.css') }}" type="text/css" />
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                <h4 class="mb-sm-0 font-size-18">SPS Settings</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Genehmigt">
+                        <div class="card bg-success border-success">
+                            <div class="pt-2 text-center">
+                                <i class="display-4 bx bx-like mb-1 text-white"></i>
+                                <h5 class="text-white">Approved</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Warnung">
+                        <div class="card bg-warning border-warning">
+                            <div class="pt-2 text-center">
+                                <i class="display-4 bx bx-block mb-1 text-white"></i>
+                                <h5 class="text-white">Warning</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Motor">
+                        <div class="card bg-primary border-primary">
+                            <div class="pt-2 text-center">
+                                <i class="display-4 bx bx-chip mb-1 text-white"></i>
+                                <h5 class="text-white">Motor</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-bordered mb-4">
+                    <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>MAC</th>
+                        <th>IP</th>
+                        <th>C</th>
+                        <th>Model</th>
+                        <th>T</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <th scope="row">1</th>
+                        <td>
+                            <div class="input-group">
+                                <input class="form-control" type="text" value="AA-BB-CC-DD-EE-FF" aria-label="MAC">
+                                <button type="button" class="btn btn-soft-primary waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Scan for MAC Address">
+                                    <i class="bx bx-qr-scan font-size-16 align-middle"></i>
+                                </button>
+                            </div>
+                        </td>
+                        <td><input class="form-control" type="text" value="WWW.XXX.YYY.ZZZ" aria-label="IP"></td>
+                        <td><i class="bx bxs-circle text-success fs-2"></i></td>
+                        <td><input class="form-control" type="text" value="PD4-E601L42-E-65-3A" aria-label="Model"></td>
+                        <td><i class="bx bxs-circle text-danger fs-2"></i></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">2</th>
+                        <td>
+                            <div class="input-group">
+                                <input class="form-control" type="text" value="AA-BB-CC-DD-EE-FF" aria-label="MAC">
+                                <button type="button" class="btn btn-soft-primary waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Scan for MAC Address">
+                                    <i class="bx bx-qr-scan font-size-16 align-middle"></i>
+                                </button>
+                            </div>
+                        </td>
+                        <td><input class="form-control" type="text" value="WWW.XXX.YYY.ZZZ" aria-label="IP"></td>
+                        <td><i class="bx bxs-circle text-warning fs-2"></i></td>
+                        <td><input class="form-control" type="text" value="PD4-E601L42-E-65-3A" aria-label="Model"></td>
+                        <td><i class="bx bxs-circle text-success fs-2"></i></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">3</th>
+                        <td>
+                            <div class="input-group">
+                                <input class="form-control" type="text" value="AA-BB-CC-DD-EE-FF" aria-label="MAC">
+                                <button type="button" class="btn btn-soft-primary waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Scan for MAC Address">
+                                    <i class="bx bx-qr-scan font-size-16 align-middle"></i>
+                                </button>
+                            </div>
+                        </td>
+                        <td><input class="form-control" type="text" value="WWW.XXX.YYY.ZZZ" aria-label="IP"></td>
+                        <td><i class="bx bxs-circle text-danger fs-2"></i></td>
+                        <td><input class="form-control" type="text" value="PD4-E601L42-E-65-3A" aria-label="Model"></td>
+                        <td><i class="bx bxs-circle text-warning fs-2"></i></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">4</th>
+                        <td>
+                            <div class="input-group">
+                                <input class="form-control" type="text" value="AA-BB-CC-DD-EE-FF" aria-label="MAC">
+                                <button type="button" class="btn btn-soft-primary waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Scan for MAC Address">
+                                    <i class="bx bx-qr-scan font-size-16 align-middle"></i>
+                                </button>
+                            </div>
+                        </td>
+                        <td><input class="form-control" type="text" value="WWW.XXX.YYY.ZZZ" aria-label="IP"></td>
+                        <td><i class="bx bxs-circle text-success fs-2"></i></td>
+                        <td><input class="form-control" type="text" value="PD4-E601L42-E-65-3A" aria-label="Model"></td>
+                        <td><i class="bx bxs-circle text-danger fs-2"></i></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">5</th>
+                        <td>
+                            <div class="input-group">
+                                <input class="form-control" type="text" value="AA-BB-CC-DD-EE-FF" aria-label="MAC">
+                                <button type="button" class="btn btn-soft-primary waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Scan for MAC Address">
+                                    <i class="bx bx-qr-scan font-size-16 align-middle"></i>
+                                </button>
+                            </div>
+                        </td>
+                        <td><input class="form-control" type="text" value="WWW.XXX.YYY.ZZZ" aria-label="IP"></td>
+                        <td><i class="bx bxs-circle text-warning fs-2"></i></td>
+                        <td><input class="form-control" type="text" value="PD4-E601L42-E-65-3A" aria-label="Model"></td>
+                        <td><i class="bx bxs-circle text-success fs-2"></i></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">6</th>
+                        <td>
+                            <div class="input-group">
+                                <input class="form-control" type="text" value="AA-BB-CC-DD-EE-FF" aria-label="MAC">
+                                <button type="button" class="btn btn-soft-primary waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Scan for MAC Address">
+                                    <i class="bx bx-qr-scan font-size-16 align-middle"></i>
+                                </button>
+                            </div>
+                        </td>
+                        <td><input class="form-control" type="text" value="WWW.XXX.YYY.ZZZ" aria-label="IP"></td>
+                        <td><i class="bx bxs-circle text-danger fs-2"></i></td>
+                        <td><input class="form-control" type="text" value="PD4-E601L42-E-65-3A" aria-label="Model"></td>
+                        <td><i class="bx bxs-circle text-warning fs-2"></i></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">7</th>
+                        <td>
+                            <div class="input-group">
+                                <input class="form-control" type="text" value="AA-BB-CC-DD-EE-FF" aria-label="MAC">
+                                <button type="button" class="btn btn-soft-primary waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Scan for MAC Address">
+                                    <i class="bx bx-qr-scan font-size-16 align-middle"></i>
+                                </button>
+                            </div>
+                        </td>
+                        <td><input class="form-control" type="text" value="WWW.XXX.YYY.ZZZ" aria-label="IP"></td>
+                        <td><i class="bx bxs-circle text-success fs-2"></i></td>
+                        <td><input class="form-control" type="text" value="PD4-E601L42-E-65-3A" aria-label="Model"></td>
+                        <td><i class="bx bxs-circle text-danger fs-2"></i></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">8</th>
+                        <td>
+                            <div class="input-group">
+                                <input class="form-control" type="text" value="AA-BB-CC-DD-EE-FF" aria-label="MAC">
+                                <button type="button" class="btn btn-soft-primary waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Scan for MAC Address">
+                                    <i class="bx bx-qr-scan font-size-16 align-middle"></i>
+                                </button>
+                            </div>
+                        </td>
+                        <td><input class="form-control" type="text" value="WWW.XXX.YYY.ZZZ" aria-label="IP"></td>
+                        <td><i class="bx bxs-circle text-warning fs-2"></i></td>
+                        <td><input class="form-control" type="text" value="PD4-E601L42-E-65-3A" aria-label="Model"></td>
+                        <td><i class="bx bxs-circle text-success fs-2"></i></td>
+                    </tr>
+                    <tr>
+                        <th scope="row">9</th>
+                        <td>
+                            <div class="input-group">
+                                <input class="form-control" type="text" value="AA-BB-CC-DD-EE-FF" aria-label="MAC">
+                                <button type="button" class="btn btn-soft-primary waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Scan for MAC Address">
+                                    <i class="bx bx-qr-scan font-size-16 align-middle"></i>
+                                </button>
+                            </div>
+                        </td>
+                        <td><input class="form-control" type="text" value="WWW.XXX.YYY.ZZZ" aria-label="IP"></td>
+                        <td><i class="bx bxs-circle text-danger fs-2"></i></td>
+                        <td><input class="form-control" type="text" value="PD4-E601L42-E-65-3A" aria-label="Model"></td>
+                        <td><i class="bx bxs-circle text-warning fs-2"></i></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4">
+            <div class="progress progress-xl mb-3">
+                <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 25%">25%</div>
+            </div>
+
+            <div class="d-grid mb-3">
+                <button type="button" class="btn btn-primary waves-effect waves-light">Find</button>
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
+            <div class="progress progress-xl mb-3">
+                <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 50%">50%</div>
+            </div>
+
+            <div class="d-grid mb-3">
+                <button type="button" class="btn btn-success waves-effect waves-light">Connect (C)</button>
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="progress progress-xl mb-3">
+                <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">75%</div>
+            </div>
+
+            <div class="d-grid mb-3">
+                <button type="button" class="btn btn-info waves-effect waves-light">Self Test (T)</button>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block script %}
+
+{% endblock %}

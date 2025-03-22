@@ -1,0 +1,68 @@
+{% extends 'layouts/guest.html' %}
+
+{% block title %}
+    Login
+{% endblock %}
+
+{% block content %}
+    <div class="auth-page">
+        <div class="container-fluid p-0">
+            <div class="row g-0">
+                <div class="col-xxl-4 col-xl-5 col-lg-6 col-md-7 col-sm-12 mx-auto">
+                    <div class="auth-full-page-content d-flex p-sm-5 p-4">
+                        <div class="w-100">
+                            <div class="d-flex flex-column h-100">
+                                <div class="mb-4 mb-md-5 text-center">
+                                    <a href="#" class="d-block auth-logo">
+                                        <img src="{{ url_for('static', filename='images/logo-sm.svg') }}" alt="" height="28"> <span class="logo-txt">Agriculture Systems Hornung</span>
+                                    </a>
+                                </div>
+
+                                <div class="auth-content my-auto">
+                                    <div class="text-center">
+                                        <h5 class="mb-0">Welcome Back !</h5>
+                                        <p class="text-muted mt-2">Sign in to continue to Stepper Motor Control.</p>
+                                    </div>
+
+                                    {% include 'layouts/partials/flash.html' %}
+
+                                    <form class="mt-4 pt-2" action="#" method="post">
+                                        {{ form.hidden_tag() }}
+                                        <div class="mb-3">
+                                            <div class="d-flex align-items-start">
+                                                <div class="flex-grow-1">
+                                                    {{ form.license_number.label(class="form-label") }}
+                                                </div>
+                                            </div>
+
+                                            <div class="input-group auth-pass-inputgroup">
+                                                {{ form.license_number(class="form-control", placeholder="Enter license number", aria_label="License number", aria_describedby="license_number_addon") }}
+                                                <button class="btn btn-light shadow-none ms-0" type="button" id="license_number_addon"><i class="mdi mdi-eye-outline"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="mb-3">
+                                            {{ form.log_in(class="btn btn-primary w-100 waves-effect waves-light") }}
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="mt-4 mt-md-5 text-center">
+                                    <p class="mb-0">© <script>document.write(new Date().getFullYear())</script>   . Crafted with <i class="mdi mdi-heart text-danger"></i> by Agriculture Systems Hornung</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        $("#license_number_addon").on('click', function () {
+            if ($(this).siblings('input').length > 0) {
+                $(this).siblings('input').attr('type') === "password" ? $(this).siblings('input').attr('type', 'input') : $(this).siblings('input').attr('type', 'password');
+            }
+        });
+    </script>
+{% endblock %}

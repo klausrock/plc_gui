@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="" />
+    <meta name="description" content="" />
+
+    <link rel="shortcut icon" href="#" />
+
+    <title>{% block title %}{% endblock %} - Agriculture Systems Hornung</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/preloader.min.css') }}" type="text/css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/icons.min.css')}}" type="text/css" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/app.min.css')}}" type="text/css" />
+
+    {% block style %}{% endblock %}
+</head>
+<body>
+
+{% block content %}{% endblock %}
+
+<script src="{{ url_for('static', filename='plugins/jquery/jquery.min.js')}}"></script>
+<script src="{{ url_for('static', filename='plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='plugins/metismenu/metisMenu.min.js') }}"></script>
+<script src="{{ url_for('static', filename='plugins/simplebar/simplebar.min.js') }}"></script>
+<script src="{{ url_for('static', filename='plugins/node-waves/waves.min.js') }}"></script>
+<script src="{{ url_for('static', filename='plugins/feather-icons/feather.min.js') }}"></script>
+<script src="{{ url_for('static', filename='plugins/pace-js/pace.min.js') }}"></script>
+<script src="{{ url_for('static', filename='js/app.js') }}"></script>
+
+{% block script %}{% endblock %}
+</body>
+</html>

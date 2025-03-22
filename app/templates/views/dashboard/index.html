@@ -1,0 +1,885 @@
+{% extends 'layouts/app.html' %}
+
+{% block title %}Dashboard{% endblock %}
+
+{% block style %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/custom_v1.css') }}" type="text/css" />
+{% endblock %}
+
+{% block content %}
+
+    <div class="row">
+        <div class="col-12">
+            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                <h4 class="mb-sm-0 font-size-18">System Control & Monitoring</h4>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="row">
+
+                {# 1 #}
+                <div class=" col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Manuelle Einstellungen">
+                        <div class="card bg-primary border-primary">
+                            <div class="pt-2 text-center">
+                                <i class="display-4 bx bxs-cog mb-1 text-white"></i>
+                                <h5 class="text-white">Manual <br> Settings</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                {# 2 #}
+                <div class=" col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="KI-unterstützte Einstellungen">
+                        <div class="card bg-primary border-primary">
+                            <div class="pt-2 text-center">
+                                <i class="display-4 bx bx-brain mb-1 text-white"></i>
+                                <h5 class="text-white">AI Assisted <br> Settings</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                {# 3 #}
+                <div class=" col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Spannen">
+                        <div class="card bg-primary border-primary">
+                            <div class="pt-2 text-center">
+                                <i class="display-4 bx bx-expand-vertical mb-1 text-white"></i>
+                                <h5 class="text-white">Tensioning <br> &nbsp; </h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                {# 4 #}
+                <div class=" col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Sperren">
+                        <div class="card bg-primary border-primary">
+                            <div class="pt-2 text-center">
+                                <i class="display-4 bx bx-lock mb-1 text-white"></i>
+                                <h5 class="text-white">Lock <br> &nbsp; </h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="row">
+                {# 5 #}
+                <div class=" col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Lösen">
+                        <div class="card bg-primary border-primary">
+                            <div class="pt-2 text-center">
+                                <i class="display-4 bx bx-check-circle mb-1 text-white"></i>
+                                <h5 class="text-white">Solve <br> &nbsp; </h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                {# 6 #}
+                <div class=" col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Aufmerksamkeitsstörung">
+                        <div class="card bg-primary border-primary">
+                            <div class="pt-2 text-center">
+                                <i class="display-4 bx bx-error mb-1 text-white"></i>
+                                <h5 class="text-white">Attention <br> Disturbance</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                {# 7 #}
+                <div class=" col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                    <a href="#" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Notabschaltung">
+                        <div class="card bg-primary border-primary">
+                            <div class="pt-2 text-center">
+                                <i class="display-4 bx bx-power-off mb-1 text-white"></i>
+                                <h5 class="text-white">Emergency <br> Shutdown</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                {# 8 #}
+                <div class=" col-xl-3 col-lg-3 col-md-3 col-sm-6 col-6">
+                    <a href="{{ url_for('dashboard.system_settings') }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Einstellungen">
+                        <div class="card bg-primary border-primary">
+                            <div class="pt-2 text-center">
+                                <i class="display-4 bx bx-cog mb-1 text-white"></i>
+                                <h5 class="text-white">System <br> Settings</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="gui-system-content">
+        <div class="gui-system-container">
+
+            <div class="gui-system-motor-row">
+
+                {#1#}
+                <div class="gui-system-motor-col">
+                    <div class="gui-system-motor-item startSystemMotor">
+                        <div id="guiSystemMotorItem-01" class="gui-motor-meter">
+                            <span class="gui-motor-signal"></span>
+                            <span class="gui-motor-sl-num sl-green">1</span>
+                        </div>
+
+                        <div class="gui-text-block">
+                            <span class="gui-material-text">Material</span>
+                            <button class="btn-primary btn btn-sm">New</button>
+                            <span class="gui-mt-input-icon"></span>
+                        </div>
+
+                        <div class="gui-selection-listbox">
+                            <ul>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                            </ul>
+                        </div>
+
+                        <div class="gui-weight-label">
+                            <div class="gui-weight-text wl-box">Weight</div>
+                            <div class="gui-weight-num wl-box">
+                                <input id="guiSystemMotorInput-01" class="gui-weight-input" type="text" value="0" aria-label="Motor Speed Control" />
+                                <span>KG</span>
+                            </div>
+                        </div>
+
+                        <div class="gui-system-range-block">
+                            <input class="input-range" id="guiSystemMotorRange-01" type="range"  min="0" max="100" value="0" aria-label="Motor Speed Control" />
+                        </div>
+                    </div>
+                </div>
+
+                {#2#}
+                <div class="gui-system-motor-col">
+                    <div class="gui-system-motor-item startSystemMotor">
+                        <div id="guiSystemMotorItem-02" class="gui-motor-meter motor-bad-signal">
+                            <span class="gui-motor-signal"></span>
+                            <span class="gui-motor-sl-num">2</span>
+                        </div>
+
+                        <div class="gui-text-block">
+                            <span class="gui-material-text">Material</span>
+                            <button class="btn-primary btn btn-sm">New</button>
+                            <span class="gui-mt-input-icon"></span>
+                        </div>
+
+                        <div class="gui-selection-listbox">
+                            <ul>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                            </ul>
+                        </div>
+
+                        <div class="gui-weight-label">
+                            <div class="gui-weight-text wl-box">Weight</div>
+                            <div class="gui-weight-num wl-box">
+                                <input id="guiSystemMotorInput-02" class="gui-weight-input" type="text" value="0" aria-label="Motor Speed Control" />
+                                <span>KG</span>
+                            </div>
+                        </div>
+
+                        <div class="gui-system-range-block">
+                            <input class="input-range" id="guiSystemMotorRange-02" type="range"  min="0" max="100" value="0" aria-label="Motor Speed Control" />
+                        </div>
+                    </div>
+                </div>
+
+                {#3#}
+                <div class="gui-system-motor-col">
+                    <div class="gui-system-motor-item startSystemMotor">
+                        <div id="guiSystemMotorItem-03" class="gui-motor-meter">
+                            <span class="gui-motor-signal"></span>
+                            <span class="gui-motor-sl-num">3</span>
+                        </div>
+
+                        <div class="gui-text-block">
+                            <span class="gui-material-text">Material</span>
+                            <button class="btn-primary btn btn-sm">New</button>
+                            <span class="gui-mt-input-icon"></span>
+                        </div>
+
+                        <div class="gui-selection-listbox">
+                            <ul>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                            </ul>
+                        </div>
+
+                        <div class="gui-weight-label">
+                            <div class="gui-weight-text wl-box">Weight</div>
+                            <div class="gui-weight-num wl-box">
+                                <input id="guiSystemMotorInput-03" class="gui-weight-input" type="text" value="0" aria-label="Motor Speed Control" />
+                                <span>KG</span>
+                            </div>
+                        </div>
+
+                        <div class="gui-system-range-block">
+                            <input class="input-range" id="guiSystemMotorRange-03" type="range"  min="0" max="100" value="0" aria-label="Motor Speed Control" />
+                        </div>
+                    </div>
+                </div>
+
+                {#4#}
+                <div class="gui-system-motor-col">
+                    <div class="gui-system-motor-item startSystemMotor">
+                        <div id="guiSystemMotorItem-04" class="gui-motor-meter motor-bad-signal">
+                            <span class="gui-motor-signal"></span>
+                            <span class="gui-motor-sl-num">4</span>
+                        </div>
+
+                        <div class="gui-text-block">
+                            <span class="gui-material-text">Material</span>
+                            <button class="btn-primary btn btn-sm">New</button>
+                            <span class="gui-mt-input-icon"></span>
+                        </div>
+
+                        <div class="gui-selection-listbox">
+                            <ul>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                            </ul>
+                        </div>
+
+                        <div class="gui-weight-label">
+                            <div class="gui-weight-text wl-box">Weight</div>
+                            <div class="gui-weight-num wl-box">
+                                <input id="guiSystemMotorInput-04" class="gui-weight-input" type="text" value="0" aria-label="Motor Speed Control" />
+                                <span>KG</span>
+                            </div>
+                        </div>
+
+                        <div class="gui-system-range-block">
+                            <input class="input-range" id="guiSystemMotorRange-04" type="range"  min="0" max="100" value="0" aria-label="Motor Speed Control" />
+                        </div>
+                    </div>
+                </div>
+
+                {#5#}
+                <div class="gui-system-motor-col">
+                    <div class="gui-system-motor-item startSystemMotor">
+                        <div id="guiSystemMotorItem-05" class="gui-motor-meter">
+                            <span class="gui-motor-signal"></span>
+                            <span class="gui-motor-sl-num">5</span>
+                        </div>
+
+                        <div class="gui-text-block">
+                            <span class="gui-material-text">Material</span>
+                            <button class="btn-primary btn btn-sm">New</button>
+                            <span class="gui-mt-input-icon"></span>
+                        </div>
+
+                        <div class="gui-selection-listbox">
+                            <ul>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                            </ul>
+                        </div>
+
+                        <div class="gui-weight-label">
+                            <div class="gui-weight-text wl-box">Weight</div>
+                            <div class="gui-weight-num wl-box">
+                                <input id="guiSystemMotorInput-05" class="gui-weight-input" type="text" value="0" aria-label="Motor Speed Control" />
+                                <span>KG</span>
+                            </div>
+                        </div>
+
+                        <div class="gui-system-range-block">
+                            <input class="input-range" id="guiSystemMotorRange-05" type="range"  min="0" max="100" value="0" aria-label="Motor Speed Control" />
+                        </div>
+                    </div>
+                </div>
+
+                {#6#}
+                <div class="gui-system-motor-col">
+                    <div class="gui-system-motor-item startSystemMotor">
+                        <div id="guiSystemMotorItem-06" class="gui-motor-meter motor-bad-signal">
+                            <span class="gui-motor-signal"></span>
+                            <span class="gui-motor-sl-num">6</span>
+                        </div>
+
+                        <div class="gui-text-block">
+                            <span class="gui-material-text">Material</span>
+                            <button class="btn-primary btn btn-sm">New</button>
+                            <span class="gui-mt-input-icon"></span>
+                        </div>
+
+                        <div class="gui-selection-listbox">
+                            <ul>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                            </ul>
+                        </div>
+
+                        <div class="gui-weight-label">
+                            <div class="gui-weight-text wl-box">Weight</div>
+                            <div class="gui-weight-num wl-box">
+                                <input id="guiSystemMotorInput-06" class="gui-weight-input" type="text" value="0" aria-label="Motor Speed Control" />
+                                <span>KG</span>
+                            </div>
+                        </div>
+
+                        <div class="gui-system-range-block">
+                            <input class="input-range" id="guiSystemMotorRange-06" type="range"  min="0" max="100" value="0" aria-label="Motor Speed Control" />
+                        </div>
+                    </div>
+                </div>
+
+                {#7#}
+                <div class="gui-system-motor-col">
+                    <div class="gui-system-motor-item startSystemMotor">
+                        <div id="guiSystemMotorItem-07" class="gui-motor-meter">
+                            <span class="gui-motor-signal"></span>
+                            <span class="gui-motor-sl-num">7</span>
+                        </div>
+
+                        <div class="gui-text-block">
+                            <span class="gui-material-text">Material</span>
+                            <button class="btn-primary btn btn-sm">New</button>
+                            <span class="gui-mt-input-icon"></span>
+                        </div>
+
+                        <div class="gui-selection-listbox">
+                            <ul>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                            </ul>
+                        </div>
+
+                        <div class="gui-weight-label">
+                            <div class="gui-weight-text wl-box">Weight</div>
+                            <div class="gui-weight-num wl-box">
+                                <input id="guiSystemMotorInput-07" class="gui-weight-input" type="text" value="0" aria-label="Motor Speed Control" />
+                                <span>KG</span>
+                            </div>
+                        </div>
+
+                        <div class="gui-system-range-block">
+                            <input class="input-range" id="guiSystemMotorRange-07" type="range"  min="0" max="100" value="0" aria-label="Motor Speed Control" />
+                        </div>
+                    </div>
+                </div>
+
+                {#8#}
+                <div class="gui-system-motor-col">
+                    <div class="gui-system-motor-item startSystemMotor">
+                        <div id="guiSystemMotorItem-08" class="gui-motor-meter motor-bad-signal">
+                            <span class="gui-motor-signal"></span>
+                            <span class="gui-motor-sl-num">8</span>
+                        </div>
+
+                        <div class="gui-text-block">
+                            <span class="gui-material-text">Material</span>
+                            <button class="btn-primary btn btn-sm">New</button>
+                            <span class="gui-mt-input-icon"></span>
+                        </div>
+
+                        <div class="gui-selection-listbox">
+                            <ul>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                            </ul>
+                        </div>
+
+                        <div class="gui-weight-label">
+                            <div class="gui-weight-text wl-box">Weight</div>
+                            <div class="gui-weight-num wl-box">
+                                <input id="guiSystemMotorInput-08" class="gui-weight-input" type="text" value="0" aria-label="Motor Speed Control" />
+                                <span>KG</span>
+                            </div>
+                        </div>
+
+                        <div class="gui-system-range-block">
+                            <input class="input-range" id="guiSystemMotorRange-08" type="range"  min="0" max="100" value="0" aria-label="Motor Speed Control" />
+                        </div>
+                    </div>
+                </div>
+
+                {#9#}
+                <div class="gui-system-motor-col">
+                    <div class="gui-system-motor-item startSystemMotor">
+                        <div id="guiSystemMotorItem-09" class="gui-motor-meter">
+                            <span class="gui-motor-signal"></span>
+                            <span class="gui-motor-sl-num">9</span>
+                        </div>
+
+                        <div class="gui-text-block">
+                            <span class="gui-material-text">Material</span>
+                            <button class="btn-primary btn btn-sm">New</button>
+                            <span class="gui-mt-input-icon"></span>
+                        </div>
+
+                        <div class="gui-selection-listbox">
+                            <ul>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                            </ul>
+                        </div>
+
+                        <div class="gui-weight-label">
+                            <div class="gui-weight-text wl-box">Weight</div>
+                            <div class="gui-weight-num wl-box">
+                                <input id="guiSystemMotorInput-09" class="gui-weight-input" type="text" value="0" aria-label="Motor Speed Control" />
+                                <span>KG</span>
+                            </div>
+                        </div>
+
+                        <div class="gui-system-range-block">
+                            <input class="input-range" id="guiSystemMotorRange-09" type="range"  min="0" max="100" value="0" aria-label="Motor Speed Control" />
+                        </div>
+                    </div>
+                </div>
+
+                {#10#}
+                <div class="gui-system-motor-col">
+                    <div class="gui-system-motor-item startSystemMotor">
+                        <div id="guiSystemMotorItem-10" class="gui-motor-meter motor-bad-signal">
+                            <span class="gui-motor-signal"></span>
+                            <span class="gui-motor-sl-num">10</span>
+                        </div>
+
+                        <div class="gui-text-block">
+                            <span class="gui-material-text">Material</span>
+                            <button class="btn-primary btn btn-sm">New</button>
+                            <span class="gui-mt-input-icon"></span>
+                        </div>
+
+                        <div class="gui-selection-listbox">
+                            <ul>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                            </ul>
+                        </div>
+
+                        <div class="gui-weight-label">
+                            <div class="gui-weight-text wl-box">Weight</div>
+                            <div class="gui-weight-num wl-box">
+                                <input id="guiSystemMotorInput-10" class="gui-weight-input" type="text" value="0" aria-label="Motor Speed Control" />
+                                <span>KG</span>
+                            </div>
+                        </div>
+
+                        <div class="gui-system-range-block">
+                            <input class="input-range" id="guiSystemMotorRange-10" type="range"  min="0" max="100" value="0" aria-label="Motor Speed Control" />
+                        </div>
+                    </div>
+                </div>
+
+                {#11#}
+                <div class="gui-system-motor-col">
+                    <div class="gui-system-motor-item startSystemMotor">
+                        <div id="guiSystemMotorItem-11" class="gui-motor-meter">
+                            <span class="gui-motor-signal"></span>
+                            <span class="gui-motor-sl-num">11</span>
+                        </div>
+
+                        <div class="gui-text-block">
+                            <span class="gui-material-text">Material</span>
+                            <button class="btn-primary btn btn-sm">New</button>
+                            <span class="gui-mt-input-icon"></span>
+                        </div>
+
+                        <div class="gui-selection-listbox">
+                            <ul>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                            </ul>
+                        </div>
+
+                        <div class="gui-weight-label">
+                            <div class="gui-weight-text wl-box">Weight</div>
+                            <div class="gui-weight-num wl-box">
+                                <input id="guiSystemMotorInput-11" class="gui-weight-input" type="text" value="0" aria-label="Motor Speed Control" />
+                                <span>KG</span>
+                            </div>
+                        </div>
+
+                        <div class="gui-system-range-block">
+                            <input class="input-range" id="guiSystemMotorRange-11" type="range"  min="0" max="100" value="0" aria-label="Motor Speed Control" />
+                        </div>
+                    </div>
+                </div>
+
+                {#12#}
+                <div class="gui-system-motor-col">
+                    <div class="gui-system-motor-item startSystemMotor">
+                        <div id="guiSystemMotorItem-12" class="gui-motor-meter">
+                            <span class="gui-motor-signal"></span>
+                            <span class="gui-motor-sl-num">12</span>
+                        </div>
+
+                        <div class="gui-text-block">
+                            <span class="gui-material-text">Material</span>
+                            <button class="btn-primary btn btn-sm">New</button>
+                            <span class="gui-mt-input-icon"></span>
+                        </div>
+
+                        <div class="gui-selection-listbox">
+                            <ul>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                            </ul>
+                        </div>
+
+                        <div class="gui-weight-label">
+                            <div class="gui-weight-text wl-box">Weight</div>
+                            <div class="gui-weight-num wl-box">
+                                <input id="guiSystemMotorInput-12" class="gui-weight-input" type="text" value="0" aria-label="Motor Speed Control" />
+                                <span>KG</span>
+                            </div>
+                        </div>
+
+                        <div class="gui-system-range-block">
+                            <input class="input-range" id="guiSystemMotorRange-12" type="range"  min="0" max="100" value="0" aria-label="Motor Speed Control" />
+                        </div>
+                    </div>
+                </div>
+
+                {#13#}
+                <div class="gui-system-motor-col">
+                    <div class="gui-system-motor-item startSystemMotor">
+                        <div id="guiSystemMotorItem-13" class="gui-motor-meter motor-bad-signal">
+                            <span class="gui-motor-signal"></span>
+                            <span class="gui-motor-sl-num">13</span>
+                        </div>
+
+                        <div class="gui-text-block">
+                            <span class="gui-material-text">Material</span>
+                            <button class="btn-primary btn btn-sm">New</button>
+                            <span class="gui-mt-input-icon"></span>
+                        </div>
+
+                        <div class="gui-selection-listbox">
+                            <ul>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                            </ul>
+                        </div>
+
+                        <div class="gui-weight-label">
+                            <div class="gui-weight-text wl-box">Weight</div>
+                            <div class="gui-weight-num wl-box">
+                                <input id="guiSystemMotorInput-13" class="gui-weight-input" type="text" value="0" aria-label="Motor Speed Control" />
+                                <span>KG</span>
+                            </div>
+                        </div>
+
+                        <div class="gui-system-range-block">
+                            <input class="input-range" id="guiSystemMotorRange-13" type="range"  min="0" max="100" value="0" aria-label="Motor Speed Control" />
+                        </div>
+                    </div>
+                </div>
+
+                {#14#}
+                <div class="gui-system-motor-col">
+                    <div class="gui-system-motor-item startSystemMotor">
+                        <div id="guiSystemMotorItem-14" class="gui-motor-meter">
+                            <span class="gui-motor-signal"></span>
+                            <span class="gui-motor-sl-num">14</span>
+                        </div>
+
+                        <div class="gui-text-block">
+                            <span class="gui-material-text">Material</span>
+                            <button class="btn-primary btn btn-sm">New</button>
+                            <span class="gui-mt-input-icon"></span>
+                        </div>
+
+                        <div class="gui-selection-listbox">
+                            <ul>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                            </ul>
+                        </div>
+
+                        <div class="gui-weight-label">
+                            <div class="gui-weight-text wl-box">Weight</div>
+                            <div class="gui-weight-num wl-box">
+                                <input id="guiSystemMotorInput-14" class="gui-weight-input" type="text" value="0" aria-label="Motor Speed Control" />
+                                <span>KG</span>
+                            </div>
+                        </div>
+
+                        <div class="gui-system-range-block">
+                            <input class="input-range" id="guiSystemMotorRange-14" type="range"  min="0" max="100" value="0" aria-label="Motor Speed Control"/>
+                        </div>
+                    </div>
+                </div>
+
+                {#15#}
+                <div class="gui-system-motor-col">
+                    <div class="gui-system-motor-item startSystemMotor">
+                        <div id="guiSystemMotorItem-15" class="gui-motor-meter motor-bad-signal">
+                            <span class="gui-motor-signal"></span>
+                            <span class="gui-motor-sl-num">15</span>
+                        </div>
+
+                        <div class="gui-text-block">
+                            <span class="gui-material-text">Material</span>
+                            <button class="btn-primary btn btn-sm">New</button>
+                            <span class="gui-mt-input-icon"></span>
+                        </div>
+
+                        <div class="gui-selection-listbox">
+                            <ul>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                            </ul>
+                        </div>
+
+                        <div class="gui-weight-label">
+                            <div class="gui-weight-text wl-box">Weight</div>
+                            <div class="gui-weight-num wl-box">
+                                <input id="guiSystemMotorInput-15" class="gui-weight-input" type="text" value="0" aria-label="Motor Speed Control" />
+                                <span>KG</span>
+                            </div>
+                        </div>
+
+                        <div class="gui-system-range-block">
+                            <input class="input-range" id="guiSystemMotorRange-15" type="range"  min="0" max="100" value="0" aria-label="Motor Speed Control" />
+                        </div>
+                    </div>
+                </div>
+
+                {#16#}
+                <div class="gui-system-motor-col">
+                    <div class="gui-system-motor-item startSystemMotor">
+                        <div id="guiSystemMotorItem-16" class="gui-motor-meter">
+                            <span class="gui-motor-signal"></span>
+                            <span class="gui-motor-sl-num">16</span>
+                        </div>
+
+                        <div class="gui-text-block">
+                            <span class="gui-material-text">Material</span>
+                            <button class="btn-primary btn btn-sm">New</button>
+                            <span class="gui-mt-input-icon"></span>
+                        </div>
+
+                        <div class="gui-selection-listbox">
+                            <ul>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                                <li>Material 1 | LxWxH | XKg</li>
+                            </ul>
+                        </div>
+
+                        <div class="gui-weight-label">
+                            <div class="gui-weight-text wl-box">Weight</div>
+                            <div class="gui-weight-num wl-box">
+                                <input id="guiSystemMotorInput-16" class="gui-weight-input" type="text" value="0" aria-label="Motor Speed Control" />
+                                <span>KG</span>
+                            </div>
+                        </div>
+
+                        <div class="gui-system-range-block">
+                            <input class="input-range" id="guiSystemMotorRange-16" type="range"  min="0" max="100" value="0" aria-label="Motor Speed Control" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end page content -->
+
+{% endblock %}
+
+{% block script %}
+    <script src="{{ url_for('static', filename='js/speedometer.js') }}"></script>
+    <script>
+
+        // Configuration for the speedometer
+        const speedometerConfig = {
+            edgeRadius: 104,
+            indicatorRadius: 90,
+            indicatorNumbRadius: 60,
+            speedoNobeW: 54,
+            gagueLabel: 'N/m',
+            maxVal: 1000,
+            divFact: 50,
+            dangerLevel: 700,
+            speedPositionTxtWH: 70
+        };
+
+        // Define the elements dynamically
+        const speedometerData = [
+            {
+                inputId: 'guiSystemMotorInput-01',
+                rangeId: 'guiSystemMotorRange-01',
+                containerId: 'guiSystemMotorItem-01'
+            },
+            {
+                inputId: 'guiSystemMotorInput-02',
+                rangeId: 'guiSystemMotorRange-02',
+                containerId: 'guiSystemMotorItem-02'
+            },
+            {
+                inputId: 'guiSystemMotorInput-03',
+                rangeId: 'guiSystemMotorRange-03',
+                containerId: 'guiSystemMotorItem-03'
+            },
+            {
+                inputId: 'guiSystemMotorInput-04',
+                rangeId: 'guiSystemMotorRange-04',
+                containerId: 'guiSystemMotorItem-04'
+            },
+            {
+                inputId: 'guiSystemMotorInput-05',
+                rangeId: 'guiSystemMotorRange-05',
+                containerId: 'guiSystemMotorItem-05'
+            },
+            {
+                inputId: 'guiSystemMotorInput-06',
+                rangeId: 'guiSystemMotorRange-06',
+                containerId: 'guiSystemMotorItem-06'
+            },
+            {
+                inputId: 'guiSystemMotorInput-07',
+                rangeId: 'guiSystemMotorRange-07',
+                containerId: 'guiSystemMotorItem-07'
+            },
+            {
+                inputId: 'guiSystemMotorInput-08',
+                rangeId: 'guiSystemMotorRange-08',
+                containerId: 'guiSystemMotorItem-08'
+            },
+            {
+                inputId: 'guiSystemMotorInput-09',
+                rangeId: 'guiSystemMotorRange-09',
+                containerId: 'guiSystemMotorItem-09'
+            },
+            {
+                inputId: 'guiSystemMotorInput-10',
+                rangeId: 'guiSystemMotorRange-10',
+                containerId: 'guiSystemMotorItem-10'
+            },
+            {
+                inputId: 'guiSystemMotorInput-11',
+                rangeId: 'guiSystemMotorRange-11',
+                containerId: 'guiSystemMotorItem-11'
+            },
+            {
+                inputId: 'guiSystemMotorInput-12',
+                rangeId: 'guiSystemMotorRange-12',
+                containerId: 'guiSystemMotorItem-12'
+            },
+            {
+                inputId: 'guiSystemMotorInput-13',
+                rangeId: 'guiSystemMotorRange-13',
+                containerId: 'guiSystemMotorItem-13'
+            },
+            {
+                inputId: 'guiSystemMotorInput-14',
+                rangeId: 'guiSystemMotorRange-14',
+                containerId: 'guiSystemMotorItem-14'
+            },
+            {
+                inputId: 'guiSystemMotorInput-15',
+                rangeId: 'guiSystemMotorRange-15',
+                containerId: 'guiSystemMotorItem-15'
+            },
+            {
+                inputId: 'guiSystemMotorInput-16',
+                rangeId: 'guiSystemMotorRange-16',
+                containerId: 'guiSystemMotorItem-16'
+            }
+        ];
+
+        // Loop through the data to create and append speedometers
+        speedometerData.forEach((item) => {
+            const speedometerInstance = new speedometer(speedometerConfig);
+            document.getElementById(item.containerId).append(speedometerInstance.elm);
+
+            const rangeElement = document.getElementById(item.rangeId);
+            const inputElement = document.getElementById(item.inputId);
+
+            rangeElement.addEventListener('input', function (e) {
+                const value = e.target.value * 10;
+                speedometerInstance.setPosition(value);
+                inputElement.value = e.target.value;
+
+            });
+
+            inputElement.addEventListener('keyup', function (e) {
+                const value = e.target.value * 10;
+                speedometerInstance.setPosition(value);
+                rangeElement.value = e.target.value;
+            });
+
+        });
+
+    </script>
+{% endblock %}

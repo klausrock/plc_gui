@@ -1,0 +1,480 @@
+#page-topbar{
+    z-index: 999;
+}
+
+/**
+ * SpeedMeter Style
+ */
+.speedometer {
+    background:#0F0F0F;
+    position: relative;
+
+    border-radius:50%;
+}
+.speedometer .speedNobe{
+    position:absolute;
+    width:100%;
+    z-index:10;
+    transition: all 1s;
+}
+.speedometer .speedPosition {
+    position: absolute;
+    text-align: center;
+    line-height: 80PX;
+    font-family:arial;
+    font-size: 30px;
+    font-weight:bold;
+    border-radius: 50%;
+
+    background: #191919;
+    color: #FFF;
+    box-shadow: 0 0 3px 3px black;
+}
+.speedometer .fonts{
+    font-family:arial;
+    font-weight:bold;
+    width:100%;
+    text-align:center;
+}
+
+.speedometer .speedNobe div{
+    background: #48a3cb;
+    position: absolute;
+    height: 100%;
+    top: 0;
+}
+.speedometer .numb,.nob{
+    transition: opacity 1s;
+    position: absolute;
+    opacity: 0.5;
+}
+.speedometer .nob{
+    background:#eee;
+    box-shadow: 0 0 2px 1px #eee;
+}
+.speedometer .numb{
+    color:#eee;
+    text-align: left;
+    overflow: hidden;
+    opacity: 0.5;
+    font-family: arial;
+    font-size: 16px;
+    font-weight: bold;
+}
+.speedometer .nob.bright{
+    opacity: 1;
+}
+.speedometer .nob.danger{
+    background:#FF113A;
+    box-shadow: 0 0 2px 1px #FF113A;
+}
+.speedometer .numb.bright{
+    opacity: 1;
+}
+.speedometer .numb.danger{
+    color: #FF113A;
+}
+
+.gui-system-motor-item .speedometer .numb{
+    font-size: 12px;
+    line-height: 16px;
+}
+body .gui-system-motor-item .midNob,
+body .gui-system-motor-item .nob{
+    height: 2px !important;
+}
+
+.gui-system-motor-item .speedometer .speedPosition{
+    font-size: 26px;
+    line-height: 64px;
+}
+
+/**
+ * Custom Style
+ */
+.gui-system-content{
+    margin-bottom: 30px;
+}
+
+.gui-system-motor-row{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    column-gap: 15px;
+    row-gap: 15px;
+    margin-bottom: 30px;
+}
+.gui-system-motor-row .gui-system-motor-col{
+    flex-grow: 1;
+    flex: 0 0 240px;
+    width: 100%;
+}
+
+.gui-system-motor-item{
+    position: relative;
+    width: 240px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 10px;
+}
+
+.gui-motor-meter{
+    position: relative;
+    border: 3px solid #5156be;
+    border-radius: 50%;
+    min-height: 208px;
+    min-width: 208px;
+}
+.gui-system-motor-item .gui-motor-meter .gui-motor-sl-num{
+    position: absolute;
+    left: 50%;
+    margin-left: -15px;
+    top: 50px;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background: #015186;
+    color: rgba(255, 255, 255, 0.80);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #0a6cb3;
+    font-size: 16px;
+    line-height: 1;
+    z-index: 10;
+}
+.gui-system-motor-item .gui-motor-meter .gui-motor-sl-num.sl-green{
+    background-color: #00b247;
+    border-color: #0d9c42;
+}
+.startSystemMotor .gui-motor-meter .gui-motor-signal{
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    border: 2px solid #949caf;
+    display: block;
+    position: absolute;
+    top: 4px;
+    right: 0;
+    z-index: 10;
+}
+.startSystemMotor .gui-motor-meter .gui-motor-signal:before{
+    content: "";
+    height: 22px;
+    width: 22px;
+    border-radius: 50%;
+    background: #00b247;
+    position: absolute;
+    left: 2px;
+    top: 2px;
+}
+.startSystemMotor .motor-bad-signal .gui-motor-signal:before{
+    background: #fc0400;
+    animation: signalBlink 1s linear infinite;
+}
+
+@keyframes signalBlink{
+    10%{opacity: 1; scale: 1;}
+    50%{opacity: 0.8; scale: 0.8;}
+    100%{opacity: 1; scale: 1;}
+}
+
+.gui-system-range-block{
+    display: flex;
+    width: 100%;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+    column-gap: 10px;
+    padding: 15px 0 0;
+}
+.gui-system-range-block .input-range{
+    width: 80%;
+}
+
+.gui-text-block{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 35px;
+    width: 100%;
+    padding: 8px 40px 8px 10px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+.gui-text-block .gui-material-text{
+    display: block;
+    font-size: 15px;
+    line-height: 1;
+}
+.gui-text-block .btn{
+    line-height: 1.1;
+}
+.gui-text-block .gui-text-input{
+    width: 100%;
+    text-align: center;
+    padding: 8px 40px 8px 10px;
+    font-size: 15px;
+    font-weight: normal;
+    line-height: 1px;
+    height: 35px;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+}
+.gui-text-block .gui-mt-input-icon{
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    height: 20px;
+    width: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 576 512"><path d="M234.7 42.7L197 56.8c-3 1.1-5 4-5 7.2s2 6.1 5 7.2l37.7 14.1L248.8 123c1.1 3 4 5 7.2 5s6.1-2 7.2-5l14.1-37.7L315 71.2c3-1.1 5-4 5-7.2s-2-6.1-5-7.2L277.3 42.7 263.2 5c-1.1-3-4-5-7.2-5s-6.1 2-7.2 5L234.7 42.7zM46.1 395.4c-18.7 18.7-18.7 49.1 0 67.9l34.6 34.6c18.7 18.7 49.1 18.7 67.9 0L529.9 116.5c18.7-18.7 18.7-49.1 0-67.9L495.3 14.1c-18.7-18.7-49.1-18.7-67.9 0L46.1 395.4zM484.6 82.6l-105 105-23.3-23.3 105-105 23.3 23.3zM7.5 117.2C3 118.9 0 123.2 0 128s3 9.1 7.5 10.8L64 160l21.2 56.5c1.7 4.5 6 7.5 10.8 7.5s9.1-3 10.8-7.5L128 160l56.5-21.2c4.5-1.7 7.5-6 7.5-10.8s-3-9.1-7.5-10.8L128 96 106.8 39.5C105.1 35 100.8 32 96 32s-9.1 3-10.8 7.5L64 96 7.5 117.2zm352 256c-4.5 1.7-7.5 6-7.5 10.8s3 9.1 7.5 10.8L416 416l21.2 56.5c1.7 4.5 6 7.5 10.8 7.5s9.1-3 10.8-7.5L480 416l56.5-21.2c4.5-1.7 7.5-6 7.5-10.8s-3-9.1-7.5-10.8L480 352l-21.2-56.5c-1.7-4.5-6-7.5-10.8-7.5s-9.1 3-10.8 7.5L416 352l-56.5 21.2z" fill="%235ba4f0"/></svg>');
+}
+.gui-text-block .gui-mt-input-icon img,
+.gui-text-block .gui-mt-input-icon svg{
+    width: 20px;
+}
+
+.gui-selection-listbox{
+    display: block;
+    position: relative;
+    width: 100%;
+    border: 1px solid #cccccc;
+    border-radius: 4px;
+    padding: 10px;
+    height: 90px;
+    overflow-y: auto;
+}
+.gui-selection-listbox ul{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.gui-selection-listbox ul li{
+    position: relative;
+    list-style-type: none;
+    font-size: 14px;
+    line-height: 1;
+    padding: 5px 5px 5px 15px;
+    text-align: left;
+    color: #000000;
+}
+.gui-selection-listbox ul li:before{
+    content: "";
+    height: 10px;
+    width: 10px;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    top: 8px;
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="8" viewBox="0 0 448 512"><path d="M438.6 105.4c12.5 12.5 12.5 32.8 0 45.3l-256 256c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0L160 338.7 393.4 105.4c12.5-12.5 32.8-12.5 45.3 0z"/></svg>');
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.gui-weight-label{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    flex-wrap: nowrap;
+    margin-top: 10px;
+}
+.gui-weight-label .wl-box{
+    flex-grow: 1;
+    width: 50%;
+    border: 1px solid #cccccc;
+    display: flex;
+    height: 35px;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    font-size: 15px;
+    line-height: 15px;
+}
+.gui-weight-label .wl-box span{
+    margin-right: 5px;
+}
+.gui-weight-label .wl-box .guiWeightKG{
+    font-weight: 600;
+}
+
+.gui-weight-label .gui-weight-input{
+    width: auto;
+    border: none;
+    padding: 0;
+    width: 50px;
+    padding-right: 5px;
+    text-align: right;
+    font-size: 15px;
+    font-weight: 600;
+}
+.gui-weight-label .gui-weight-input:focus,
+.gui-weight-label .gui-weight-input:active{
+    outline: none !important;
+}
+
+
+/**
+ * GUI System Header
+ */
+.gui-system-header{
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    position: relative;
+    align-items: center;
+    justify-content: space-between;
+    column-gap: 20px;
+    row-gap: 10px;
+    margin-bottom: 20px;
+}
+
+.gui-system-btn-group{
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    column-gap: 10px;
+}
+
+.gui-sys-square-btn{
+    height: 66px;
+    width: 66px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #5156be;
+    padding: 5px;
+    border-radius: 4px;
+    color: #000000;
+    text-decoration: none;
+    cursor: pointer;
+    box-shadow: none;
+    transition: all 0.3s ease-in-out 0s;
+    background-color: #fdfefb;
+}
+
+.gui-sys-square-btn:active,
+.gui-sys-square-btn:hover,
+.gui-sys-square-btn:focus{
+    outline: none !important;
+    border-color: #4549a2;
+}
+
+.gui-sys-square-btn img,
+.gui-sys-square-btn svg{
+    width: 100%;
+    max-height: 50px;
+    max-width: 50px;
+}
+
+.gui-btn-group-row{
+    row-gap: 15px;
+    margin-right: -8px;
+    margin-left: -8px;
+}
+.gui-btn-group-row .col-sm-3,
+.gui-btn-group-row .col-sm-4,
+.gui-btn-group-row .col-6{
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+.gui-system-control-btn{
+    width: 100%;
+    padding: 10px 20px;
+    font-size: 18px;
+    line-height: 1.2;
+    transition: all 0.3s ease-in-out 0s;
+}
+
+/**
+ * Motor Container
+ */
+@media (min-width: 600px){
+    .gui-system-motor-row .gui-system-motor-col{
+        flex: 0 0 calc(50% - 8px);
+    }
+    .gui-system-motor-row .gui-system-motor-col .gui-system-motor-item{
+        width: 100%;
+    }
+}
+@media (min-width: 820px){
+    .gui-system-motor-row .gui-system-motor-col{
+        flex: 0 0 calc(33.3333% - 10px);
+    }
+
+    .gui-sys-square-btn{
+        height: 76px;
+        width: 76px;
+    }
+    .gui-sys-square-btn img,
+    .gui-sys-square-btn svg{
+        max-height: 64px;
+        max-width: 64px;
+    }
+}
+
+@media (min-width: 992px){
+    .gui-system-motor-row .gui-system-motor-col{
+        flex: 0 0 calc(50% - 8px);
+    }
+}
+@media (min-width: 1200px){
+    .gui-system-motor-row .gui-system-motor-col{
+        flex: 0 0 calc(33.3333% - 10px);
+    }
+
+    .gui-sys-square-btn{
+        height: 90px;
+        width: 90px;
+    }
+    .gui-sys-square-btn img,
+    .gui-sys-square-btn svg{
+        max-height: 75px;
+        max-width: 75px;
+    }
+}
+@media (min-width: 1366px){
+    .gui-system-motor-row .gui-system-motor-col{
+        flex: 0 0 calc(25% - 12px);
+    }
+}
+@media (min-width: 1570px){
+    .gui-system-motor-row .gui-system-motor-col{
+        flex: 0 0 calc(20% - 12px);
+    }
+}
+@media (min-width: 1820px){
+    .gui-system-motor-row .gui-system-motor-col{
+        flex: 0 0 calc(16.6666% - 13px);
+    }
+}
+
+@media (max-width: 767px){
+    .gui-system-control-btn{
+        padding-left: 10px;
+        padding-right: 10px;
+        font-size: 15px;
+    }
+}
+@media (max-width: 599px){
+    .gui-system-motor-row .gui-system-motor-col{
+        flex: 0 0 100%;
+    }
+    .gui-system-motor-row .gui-system-motor-col .gui-system-motor-item{
+        width: 100%;
+    }
+}
