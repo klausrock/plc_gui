@@ -2,7 +2,12 @@
 
 ### Setup a virtual environment
 ```
-python -m venv myevn
+python -m venv .venv
+```
+
+### Active virtual environment
+```
+source .venv/bin/activate
 ```
 
 ### Install Dependencies
