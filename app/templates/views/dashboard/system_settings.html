@@ -59,6 +59,26 @@
     </div>
 
     <div class="row">
+        <div class="col-md-6">
+
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" id="mac" placeholder="Enter MAC Address" aria-label="Enter MAC Address" aria-describedby="button-addon2">
+                <button class="btn btn-primary waves-effect waves-light" type="button" id="findIp" onclick="pingMAC()">Find IP</button>
+            </div>
+
+            <div class="progress mb-3" style="height: 20px; display: none;" id="progressContainer">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%;" id="progressBar">Scanning...</div>
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+            <input type="text" class="form-control" aria-label="IP Address" id="ip" placeholder="IP Address" readonly>
+        </div>
+
+    </div>
+
+    <div class="row">
         <div class="col-12">
             <div class="table-responsive">
                 <table class="table table-bordered mb-4">
@@ -70,179 +90,30 @@
                         <th>C</th>
                         <th>Model</th>
                         <th>T</th>
+                        <th>Created At</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row">1</th>
-                        <td>
-                            <div class="input-group">
-                                <input class="form-control" type="text" value="AA-BB-CC-DD-EE-FF" aria-label="MAC">
-                                <button type="button" class="btn btn-soft-primary waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Scan for MAC Address">
-                                    <i class="bx bx-qr-scan font-size-16 align-middle"></i>
-                                </button>
-                            </div>
-                        </td>
-                        <td><input class="form-control" type="text" value="WWW.XXX.YYY.ZZZ" aria-label="IP"></td>
-                        <td><i class="bx bxs-circle text-success fs-2"></i></td>
-                        <td><input class="form-control" type="text" value="PD4-E601L42-E-65-3A" aria-label="Model"></td>
-                        <td><i class="bx bxs-circle text-danger fs-2"></i></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">2</th>
-                        <td>
-                            <div class="input-group">
-                                <input class="form-control" type="text" value="AA-BB-CC-DD-EE-FF" aria-label="MAC">
-                                <button type="button" class="btn btn-soft-primary waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Scan for MAC Address">
-                                    <i class="bx bx-qr-scan font-size-16 align-middle"></i>
-                                </button>
-                            </div>
-                        </td>
-                        <td><input class="form-control" type="text" value="WWW.XXX.YYY.ZZZ" aria-label="IP"></td>
-                        <td><i class="bx bxs-circle text-warning fs-2"></i></td>
-                        <td><input class="form-control" type="text" value="PD4-E601L42-E-65-3A" aria-label="Model"></td>
-                        <td><i class="bx bxs-circle text-success fs-2"></i></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">3</th>
-                        <td>
-                            <div class="input-group">
-                                <input class="form-control" type="text" value="AA-BB-CC-DD-EE-FF" aria-label="MAC">
-                                <button type="button" class="btn btn-soft-primary waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Scan for MAC Address">
-                                    <i class="bx bx-qr-scan font-size-16 align-middle"></i>
-                                </button>
-                            </div>
-                        </td>
-                        <td><input class="form-control" type="text" value="WWW.XXX.YYY.ZZZ" aria-label="IP"></td>
-                        <td><i class="bx bxs-circle text-danger fs-2"></i></td>
-                        <td><input class="form-control" type="text" value="PD4-E601L42-E-65-3A" aria-label="Model"></td>
-                        <td><i class="bx bxs-circle text-warning fs-2"></i></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">4</th>
-                        <td>
-                            <div class="input-group">
-                                <input class="form-control" type="text" value="AA-BB-CC-DD-EE-FF" aria-label="MAC">
-                                <button type="button" class="btn btn-soft-primary waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Scan for MAC Address">
-                                    <i class="bx bx-qr-scan font-size-16 align-middle"></i>
-                                </button>
-                            </div>
-                        </td>
-                        <td><input class="form-control" type="text" value="WWW.XXX.YYY.ZZZ" aria-label="IP"></td>
-                        <td><i class="bx bxs-circle text-success fs-2"></i></td>
-                        <td><input class="form-control" type="text" value="PD4-E601L42-E-65-3A" aria-label="Model"></td>
-                        <td><i class="bx bxs-circle text-danger fs-2"></i></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">5</th>
-                        <td>
-                            <div class="input-group">
-                                <input class="form-control" type="text" value="AA-BB-CC-DD-EE-FF" aria-label="MAC">
-                                <button type="button" class="btn btn-soft-primary waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Scan for MAC Address">
-                                    <i class="bx bx-qr-scan font-size-16 align-middle"></i>
-                                </button>
-                            </div>
-                        </td>
-                        <td><input class="form-control" type="text" value="WWW.XXX.YYY.ZZZ" aria-label="IP"></td>
-                        <td><i class="bx bxs-circle text-warning fs-2"></i></td>
-                        <td><input class="form-control" type="text" value="PD4-E601L42-E-65-3A" aria-label="Model"></td>
-                        <td><i class="bx bxs-circle text-success fs-2"></i></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">6</th>
-                        <td>
-                            <div class="input-group">
-                                <input class="form-control" type="text" value="AA-BB-CC-DD-EE-FF" aria-label="MAC">
-                                <button type="button" class="btn btn-soft-primary waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Scan for MAC Address">
-                                    <i class="bx bx-qr-scan font-size-16 align-middle"></i>
-                                </button>
-                            </div>
-                        </td>
-                        <td><input class="form-control" type="text" value="WWW.XXX.YYY.ZZZ" aria-label="IP"></td>
-                        <td><i class="bx bxs-circle text-danger fs-2"></i></td>
-                        <td><input class="form-control" type="text" value="PD4-E601L42-E-65-3A" aria-label="Model"></td>
-                        <td><i class="bx bxs-circle text-warning fs-2"></i></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">7</th>
-                        <td>
-                            <div class="input-group">
-                                <input class="form-control" type="text" value="AA-BB-CC-DD-EE-FF" aria-label="MAC">
-                                <button type="button" class="btn btn-soft-primary waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Scan for MAC Address">
-                                    <i class="bx bx-qr-scan font-size-16 align-middle"></i>
-                                </button>
-                            </div>
-                        </td>
-                        <td><input class="form-control" type="text" value="WWW.XXX.YYY.ZZZ" aria-label="IP"></td>
-                        <td><i class="bx bxs-circle text-success fs-2"></i></td>
-                        <td><input class="form-control" type="text" value="PD4-E601L42-E-65-3A" aria-label="Model"></td>
-                        <td><i class="bx bxs-circle text-danger fs-2"></i></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">8</th>
-                        <td>
-                            <div class="input-group">
-                                <input class="form-control" type="text" value="AA-BB-CC-DD-EE-FF" aria-label="MAC">
-                                <button type="button" class="btn btn-soft-primary waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Scan for MAC Address">
-                                    <i class="bx bx-qr-scan font-size-16 align-middle"></i>
-                                </button>
-                            </div>
-                        </td>
-                        <td><input class="form-control" type="text" value="WWW.XXX.YYY.ZZZ" aria-label="IP"></td>
-                        <td><i class="bx bxs-circle text-warning fs-2"></i></td>
-                        <td><input class="form-control" type="text" value="PD4-E601L42-E-65-3A" aria-label="Model"></td>
-                        <td><i class="bx bxs-circle text-success fs-2"></i></td>
-                    </tr>
-                    <tr>
-                        <th scope="row">9</th>
-                        <td>
-                            <div class="input-group">
-                                <input class="form-control" type="text" value="AA-BB-CC-DD-EE-FF" aria-label="MAC">
-                                <button type="button" class="btn btn-soft-primary waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Scan for MAC Address">
-                                    <i class="bx bx-qr-scan font-size-16 align-middle"></i>
-                                </button>
-                            </div>
-                        </td>
-                        <td><input class="form-control" type="text" value="WWW.XXX.YYY.ZZZ" aria-label="IP"></td>
-                        <td><i class="bx bxs-circle text-danger fs-2"></i></td>
-                        <td><input class="form-control" type="text" value="PD4-E601L42-E-65-3A" aria-label="Model"></td>
-                        <td><i class="bx bxs-circle text-warning fs-2"></i></td>
-                    </tr>
+                    {% for motor in motors %}
+                        <tr>
+                            <th scope="row">{{ motor.engine_number }}</th>
+                            <td>
+                                <div class="input-group">
+                                    <input class="form-control" type="text" value="{{ motor.mac_address }}" aria-label="MAC">
+                                    <button type="button" class="btn btn-soft-primary waves-effect waves-light" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-original-title="Scan for MAC Address">
+                                        <i class="bx bx-qr-scan font-size-16 align-middle"></i>
+                                    </button>
+                                </div>
+                            </td>
+                            <td><input class="form-control" type="text" value="{{ motor.ip_address }}" aria-label="IP"></td>
+                            <td><i class="bx bxs-circle fs-2 {% if motor.connected %} text-success {% else %} text-danger {% endif %}"></i></td>
+                            <td><input class="form-control" type="text" value="{{ motor.model_number }}" aria-label="Model"></td>
+                            <td><i class="bx bxs-circle fs-2 {% if motor.tested %} text-success {% else %} text-danger {% endif %}"></i></td>
+                            <td>{{ motor.created_at.strftime('%B %d, %Y, %I:%M %p') }}</td>
+                        </tr>
+                    {% endfor %}
                     </tbody>
                 </table>
-            </div>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-md-4">
-            <div class="progress progress-xl mb-3">
-                <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 25%">25%</div>
-            </div>
-
-            <div class="d-grid mb-3">
-                <button type="button" class="btn btn-primary waves-effect waves-light">Find</button>
-            </div>
-
-        </div>
-
-        <div class="col-md-4">
-            <div class="progress progress-xl mb-3">
-                <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 50%">50%</div>
-            </div>
-
-            <div class="d-grid mb-3">
-                <button type="button" class="btn btn-success waves-effect waves-light">Connect (C)</button>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="progress progress-xl mb-3">
-                <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">75%</div>
-            </div>
-
-            <div class="d-grid mb-3">
-                <button type="button" class="btn btn-info waves-effect waves-light">Self Test (T)</button>
             </div>
         </div>
     </div>
@@ -250,5 +121,77 @@
 {% endblock %}
 
 {% block script %}
+    <script>
+        async function pingMAC() {
+            const mac = document.getElementById('mac').value;
+            const findBtn = document.getElementById('findIp');
+            const progressBar = document.getElementById('progressBar');
+            const progressContainer = document.getElementById('progressContainer');
 
+            progressContainer.style.display = 'block';
+            progressBar.style.width = '0%';
+            progressBar.innerText = 'Scanning...';
+
+            findBtn.innerText = 'Processing...';
+            findBtn.disabled = true;
+
+            let progress = 0;
+
+            const progressInterval = setInterval(() => {
+                if (progress < 90) {
+                    progress += 10;
+                    progressBar.style.width = progress + '%';
+                }
+            }, 300);
+
+            console.log(mac)
+
+            try {
+                const response = await fetch('/ping_mac', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ mac: mac })
+                });
+
+                console.log(response)
+                const data = await response.json();
+                console.log(data)
+
+                if (data.ip) {
+                    document.getElementById('ip').value = data.ip;
+                    document.getElementById('ip').style.backgroundColor = '#2AB57D';
+
+                    progressBar.innerText = 'IP Found!';
+                    progressBar.style.width = '100%';
+                    progressBar.classList.add('bg-success');
+
+                } else {
+                    document.getElementById('ip').value = "IP Not Found";
+                    document.getElementById('ip').style.backgroundColor = '#FD625E';
+
+                    progressBar.innerText = 'IP Not Found';
+                    progressBar.style.width = '100%';
+                    progressBar.classList.add('bg-danger');
+                }
+
+            } catch (error) {
+                console.error('Error:', error)
+                progressBar.innerText = 'Error Occurred';
+                progressBar.style.width = '100%';
+                progressBar.classList.add('bg-danger');
+            } finally {
+                clearInterval(progressInterval);
+
+                findBtn.innerText = 'Find IP';
+                findBtn.disabled = false;
+
+                setTimeout(() => {
+                    progressContainer.style.display = 'none';
+                    progressBar.classList.remove('bg-success', 'bg-danger');
+                }, 2000);
+            }
+        }
+    </script>
 {% endblock %}
