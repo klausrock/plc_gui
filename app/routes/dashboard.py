@@ -39,7 +39,12 @@ def ping_mac():
         return jsonify({'error': 'MAC address is required'}), 400
 
     # Assuming you have DNS configured to resolve MAC.fritz.box to an IP
-    ping_command = f"ping -n 1 {mac_address}.fritz.box" if os.name == 'nt' else f"ping -c 1 {mac_address}.fritz.box"
+    # ping_command = f"ping -n 1 {mac_address}.fritz.box" if os.name == 'nt' else f"ping -c 1 {mac_address}.fritz.box"
+
+    # Ensure MAC is uppercase and clean
+    mac_hostname = f"MAC-{mac_address}.fritz.box"
+    # mac_hostname = f"MAC-{raw_mac}"
+    ping_command = f"ping -n 1 {mac_hostname}" if os.name == 'nt' else f"ping -c 1 {mac_hostname}"
 
     try:
         result = subprocess.run(ping_command, shell=True, capture_output=True, text=True)

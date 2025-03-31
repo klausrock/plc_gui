@@ -118,33 +118,71 @@
         </div>
     </div>
 
+    {#    <div class="row">#}
+    {#        <div class="col-md-4">#}
+    {#            <div class="progress progress-xl mb-3">#}
+    {#                <div class="progress-bar bg-primary progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 25%">25%</div>#}
+    {#            </div>#}
+    {##}
+    {#            <div class="d-grid mb-3">#}
+    {#                <button type="button" class="btn btn-primary waves-effect waves-light">Find</button>#}
+    {#            </div>#}
+    {##}
+    {#        </div>#}
+    {##}
+    {#        <div class="col-md-4">#}
+    {#            <div class="progress progress-xl mb-3">#}
+    {#                <div class="progress-bar bg-success progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 50%">50%</div>#}
+    {#            </div>#}
+    {##}
+    {#            <div class="d-grid mb-3">#}
+    {#                <button type="button" class="btn btn-success waves-effect waves-light">Connect (C)</button>#}
+    {#            </div>#}
+    {#        </div>#}
+    {##}
+    {#        <div class="col-md-4">#}
+    {#            <div class="progress progress-xl mb-3">#}
+    {#                <div class="progress-bar bg-info progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">75%</div>#}
+    {#            </div>#}
+    {##}
+    {#            <div class="d-grid mb-3">#}
+    {#                <button type="button" class="btn btn-info waves-effect waves-light">Self Test (T)</button>#}
+    {#            </div>#}
+    {#        </div>#}
+    {#    </div>#}
+
 {% endblock %}
 
 {% block script %}
     <script>
         async function pingMAC() {
-            const mac = document.getElementById('mac').value;
+            const macInput = document.getElementById('mac').value;
             const findBtn = document.getElementById('findIp');
             const progressBar = document.getElementById('progressBar');
             const progressContainer = document.getElementById('progressContainer');
 
+            const macFormatted = normalizeMac(macInput);  // Format MAC
+
+            // Show Progress Bar and Reset
             progressContainer.style.display = 'block';
             progressBar.style.width = '0%';
             progressBar.innerText = 'Scanning...';
 
+            // Show processing state
             findBtn.innerText = 'Processing...';
             findBtn.disabled = true;
 
             let progress = 0;
 
+            // Simulate Progress Bar Animation
             const progressInterval = setInterval(() => {
-                if (progress < 90) {
+                if (progress < 90) {  // Increase progress bar up to 90% before waiting for the real response
                     progress += 10;
                     progressBar.style.width = progress + '%';
                 }
             }, 300);
 
-            console.log(mac)
+            console.log(macFormatted)
 
             try {
                 const response = await fetch('/ping_mac', {
@@ -152,7 +190,7 @@
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ mac: mac })
+                    body: JSON.stringify({ mac: macFormatted })
                 });
 
                 console.log(response)
@@ -183,15 +221,20 @@
                 progressBar.classList.add('bg-danger');
             } finally {
                 clearInterval(progressInterval);
-
+                // Revert button state
                 findBtn.innerText = 'Find IP';
                 findBtn.disabled = false;
 
+                // Hide progress bar after 2 seconds
                 setTimeout(() => {
                     progressContainer.style.display = 'none';
                     progressBar.classList.remove('bg-success', 'bg-danger');
                 }, 2000);
             }
+        }
+
+        function normalizeMac(mac) {
+            return mac.replace(/[^A-Fa-f0-9]/g, '').toUpperCase();
         }
     </script>
 {% endblock %}
