@@ -1,9 +1,9 @@
 import re
 import subprocess
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request, jsonify, flash, redirect, url_for
 from flask_login import login_required
 from app.models.stepperMotor import StepperMotor
-from app import os
+from app import os, db
 
 bp = Blueprint('dashboard', __name__, url_prefix='')
 
@@ -18,6 +18,7 @@ def system_settings():
     motors = StepperMotor.query.all()
     motors_list = [
         {
+            'id': motor.id,
             'engine_number': motor.engine_number,
             'mac_address': motor.mac_address,
             'ip_address': motor.ip_address,
@@ -38,12 +39,8 @@ def ping_mac():
     if not mac_address:
         return jsonify({'error': 'MAC address is required'}), 400
 
-    # Assuming you have DNS configured to resolve MAC.fritz.box to an IP
-    # ping_command = f"ping -n 1 {mac_address}.fritz.box" if os.name == 'nt' else f"ping -c 1 {mac_address}.fritz.box"
-
     # Ensure MAC is uppercase and clean
     mac_hostname = f"MAC-{mac_address}.fritz.box"
-    # mac_hostname = f"MAC-{raw_mac}"
     ping_command = f"ping -n 1 {mac_hostname}" if os.name == 'nt' else f"ping -c 1 {mac_hostname}"
 
     try:
@@ -54,11 +51,39 @@ def ping_mac():
         ip_address = match.group(1) if match else None
 
         if ip_address:
+            motor = StepperMotor.query.filter_by(mac_address=mac_address).first()
+            if motor:
+                motor.ip_address = ip_address
+                motor.connected = True
+            else:
+                motor = StepperMotor(
+                    mac_address=mac_address,
+                    ip_address=ip_address,
+                    connected=True
+                )
+                db.session.add(motor)
+            db.session.commit()
             return jsonify({'ip': ip_address})
         else:
             return jsonify({'error': 'ping failed.'})
     except Exception as e:
         return jsonify({'error': str(e)})
+
+@bp.route('/edit/<int:motor_id>')
+@login_required
+def edit_motor(motor_id):
+    motor = StepperMotor.query.get_or_404(motor_id)
+    return render_template('views/dashboard/edit_motor.html', motor=motor)
+
+@bp.route('/update/<int:motor_id>', methods=['POST'])
+@login_required
+def update_motor(motor_id):
+    motor = StepperMotor.query.get_or_404(motor_id)
+    motor.engine_number = request.form.get('engine_number')
+    motor.model_number = request.form.get('model_number')
+    db.session.commit()
+    flash('Stepper motor updated.', 'success')
+    return redirect(url_for('dashboard.system_settings'))
 
 @bp.route('/save_data', methods=['POST'])
 @login_required

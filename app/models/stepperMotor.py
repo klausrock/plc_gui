@@ -10,4 +10,5 @@ class StepperMotor(db.Model):
     model_number = db.Column(db.String(120), nullable=True)
     connected = db.Column(db.Boolean, nullable=False)
     tested = db.Column(db.Boolean, nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)

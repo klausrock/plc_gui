@@ -1,0 +1,69 @@
+{% extends 'layouts/app.html' %}
+
+{% block title %}Edit Motor{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">Edit Stepper Motor</h4>
+                </div>
+                <div class="card-body">
+                    <form action="{{ url_for('dashboard.update_motor', motor_id=motor.id) }}" method="POST">
+
+                        <div class="row mb-4">
+                            <label for="mac_address" class="col-sm-3 col-form-label">MAC Address</label>
+                            <div class="col-sm-9">
+                                <input type="text" disabled class="form-control" id="mac_address" value="{{ motor.mac_address }}">
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <label for="ip_address" class="col-sm-3 col-form-label">IP Address</label>
+                            <div class="col-sm-9">
+                                <input type="text" disabled class="form-control" id="ip_address" value="{{ motor.ip_address }}">
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <label for="connected" class="col-sm-3 col-form-label">Connected</label>
+                            <div class="col-sm-9">
+                                <i class="bx bxs-circle fs-2 {% if motor.connected %} text-success {% else %} text-danger {% endif %}"></i>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <label for="tested" class="col-sm-3 col-form-label">Tested</label>
+                            <div class="col-sm-9">
+                                <i class="bx bxs-circle fs-2 {% if motor.tested %} text-success {% else %} text-danger {% endif %}"></i>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <label for="engine_number" class="col-sm-3 col-form-label">Engine Number</label>
+                            <div class="col-sm-9">
+                                <input type="text" required class="form-control" name="engine_number" id="engine_number" value="{{ motor.engine_number }}">
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <label for="model_number" class="col-sm-3 col-form-label">Model Number</label>
+                            <div class="col-sm-9">
+                                <input type="text" required class="form-control" name="model_number" id="model_number" value="{{ motor.model_number }}">
+                            </div>
+                        </div>
+
+                        <div class="row justify-content-end">
+                            <div class="col-sm-9">
+                                <div>
+                                    <button type="submit" class="btn btn-primary w-md">Update</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
