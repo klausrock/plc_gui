@@ -85,8 +85,13 @@ def update_motor(motor_id):
     flash('Stepper motor updated.', 'success')
     return redirect(url_for('dashboard.system_settings'))
 
-@bp.route('/save_data', methods=['POST'])
-@login_required
-def save_data():
-    data = request.get_json()
-    return data
+
+@bp.route('/delete/<int:motor_id>', methods=['POST'])
+def delete_motor(motor_id):
+    motor = StepperMotor.query.get_or_404(motor_id)
+
+    db.session.delete(motor)
+    db.session.commit()
+
+    flash(f"Stepper Motor {motor.mac_address} deleted successfully!", 'success')
+    return redirect(url_for('dashboard.system_settings'))
