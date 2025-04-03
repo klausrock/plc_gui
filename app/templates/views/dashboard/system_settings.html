@@ -83,9 +83,9 @@
                         <th>Engine No.</th>
                         <th>MAC</th>
                         <th>IP</th>
-                        <th>C</th>
+                        <th class="text-center">C</th>
                         <th>Model</th>
-                        <th>T</th>
+                        <th class="text-center">T</th>
                         <th>Created At</th>
                         <th>Action</th>
                     </tr>
@@ -96,9 +96,9 @@
                             <th scope="row">{{ motor.engine_number }}</th>
                             <td>{{ motor.mac_address }}</td>
                             <td>{{ motor.ip_address }}</td>
-                            <td><i class="bx bxs-circle fs-2 {% if motor.connected %} text-success {% else %} text-danger {% endif %}"></i></td>
+                            <td  class="text-center"><i class="bx bxs-circle fs-2 {% if motor.connected %} text-success {% else %} text-danger {% endif %}"></i></td>
                             <td>{{ motor.model_number }}</td>
-                            <td><i class="bx bxs-circle fs-2 {% if motor.tested %} text-success {% else %} text-danger {% endif %}"></i></td>
+                            <td  class="text-center"><i class="bx bxs-circle fs-2 {% if motor.tested %} text-success {% else %} text-danger {% endif %}"></i></td>
                             <td>{{ motor.created_at.strftime('%B %d, %Y, %I:%M %p') }}</td>
                             <td>
                                 <a class="btn btn-primary btn-sm waves-effect waves-light" href="{{ url_for('dashboard.edit_motor', motor_id=motor.id) }}" role="button">Edit</a>

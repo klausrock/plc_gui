@@ -1,5 +1,6 @@
 import re
 import subprocess
+import httpx
 from flask import Blueprint, render_template, request, jsonify, flash, redirect, url_for
 from flask_login import login_required
 from app.models.stepperMotor import StepperMotor
@@ -51,15 +52,28 @@ def ping_mac():
         ip_address = match.group(1) if match else None
 
         if ip_address:
+            # Step 1: Try to fetch the model name
+            try:
+                model_url = f"http://{ip_address}/od/1008/00"
+                model_response = httpx.get(model_url)
+                model_number = model_response.text.strip() if model_response.ok else None
+            except Exception as e:
+                print(f"Model fetch failed: {e}")
+                model_number = None
+
+            # Step 2: Create or update motor entry
             motor = StepperMotor.query.filter_by(mac_address=mac_address).first()
             if motor:
                 motor.ip_address = ip_address
                 motor.connected = True
+                if model_number:
+                    motor.model_number = model_number
             else:
                 motor = StepperMotor(
                     mac_address=mac_address,
                     ip_address=ip_address,
-                    connected=True
+                    connected=True,
+                    model_number=model_number,
                 )
                 db.session.add(motor)
             db.session.commit()
