@@ -23,7 +23,7 @@ with app.app_context():
                      model_number='PD4-E601L42-E-65-3A', connected=True, tested=True),
         StepperMotor(engine_number=2, mac_address='AA-BB-CC-DD-EE-02', ip_address='192.168.1.102',
                      model_number='PD4-E601L42-E-65-3A', connected=True, tested=False),
-        StepperMotor(engine_number=3, mac_address='AA-BB-CC-DD-EE-03', ip_address=None, model_number=None,
+        StepperMotor(engine_number=3, mac_address='AA-BB-CC-DD-EE-03', ip_address='192.168.1.103', model_number=None,
                      connected=False, tested=False),
         StepperMotor(engine_number=4, mac_address='AA-BB-CC-DD-EE-04', ip_address='192.168.1.104',
                      model_number='PD4-E601L42-E-65-3A', connected=True, tested=True),
