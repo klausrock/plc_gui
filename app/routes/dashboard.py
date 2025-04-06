@@ -56,6 +56,7 @@ def ping_mac():
             try:
                 model_url = f"http://{ip_address}/od/1008/00"
                 model_response = httpx.get(model_url)
+                return jsonify({'ip': model_response})
                 model_number = model_response.text.strip() if model_response.ok else None
             except Exception as e:
                 print(f"Model fetch failed: {e}")
