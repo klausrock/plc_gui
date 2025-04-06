@@ -56,8 +56,7 @@ def ping_mac():
             try:
                 model_url = f"http://{ip_address}/od/1008/00"
                 model_response = httpx.get(model_url)
-                return jsonify({'ip': model_response})
-                model_number = model_response.text.strip() if model_response.ok else None
+                model_number = model_response.text.strip('\"') if model_response.text else ''
             except Exception as e:
                 print(f"Model fetch failed: {e}")
                 model_number = None
@@ -70,7 +69,10 @@ def ping_mac():
                 if model_number:
                     motor.model_number = model_number
             else:
+                last_motor = StepperMotor.query.order_by(StepperMotor.engine_number.desc()).first()
+                next_engine_number = last_motor.engine_number + 1 if last_motor else 1
                 motor = StepperMotor(
+                    engine_number=next_engine_number,
                     mac_address=mac_address,
                     ip_address=ip_address,
                     connected=True,
