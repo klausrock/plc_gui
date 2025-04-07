@@ -1,6 +1,7 @@
 import re
 import subprocess
 import httpx
+import traceback
 from flask import Blueprint, render_template, request, jsonify, flash, redirect, url_for
 from flask_login import login_required
 from app.models.stepperMotor import StepperMotor
@@ -54,12 +55,18 @@ def ping_mac():
         if ip_address:
             # Step 1: Try to fetch the model name
             try:
-                model_url = f"http://{ip_address}/od/1008/00"
-                model_response = httpx.get(model_url)
-                model_number = model_response.text.strip('\"') if model_response.text else ''
+                if is_ip_alive(ip_address):
+                    model_url = f"http://{ip_address}/od/1008/00"
+                    model_response = httpx.get(model_url)
+                    model_number = model_response.text.strip('\"') if model_response.text else ''
+                else:
+                    print(f"IP {ip_address} is not reachable.")
+                    model_number = 'ip not reachable'
             except Exception as e:
-                print(f"Model fetch failed: {e}")
-                model_number = None
+                print(f"Model number fetch failed: {e}")
+                # error_details = traceback.format_exc()
+                # print(f"Model fetch failed: {e}\n{error_details}")
+                model_number = 'api no response'
 
             # Step 2: Create or update motor entry
             motor = StepperMotor.query.filter_by(mac_address=mac_address).first()
@@ -70,7 +77,7 @@ def ping_mac():
                     motor.model_number = model_number
             else:
                 last_motor = StepperMotor.query.order_by(StepperMotor.engine_number.desc()).first()
-                next_engine_number = last_motor.engine_number + 1 if last_motor else 1
+                next_engine_number = (int(last_motor.engine_number) + 1) if last_motor else 1
                 motor = StepperMotor(
                     engine_number=next_engine_number,
                     mac_address=mac_address,
@@ -85,6 +92,8 @@ def ping_mac():
             return jsonify({'error': 'ping failed.'})
     except Exception as e:
         return jsonify({'error': str(e)})
+        # error_details = traceback.format_exc()
+        # return jsonify({'error': str(e), 'details': error_details})
 
 @bp.route('/edit/<int:motor_id>')
 @login_required
@@ -102,7 +111,6 @@ def update_motor(motor_id):
     flash('Stepper motor updated.', 'success')
     return redirect(url_for('dashboard.system_settings'))
 
-
 @bp.route('/delete/<int:motor_id>', methods=['POST'])
 def delete_motor(motor_id):
     motor = StepperMotor.query.get_or_404(motor_id)
@@ -112,3 +120,12 @@ def delete_motor(motor_id):
 
     flash(f"Stepper Motor {motor.mac_address} deleted successfully!", 'success')
     return redirect(url_for('dashboard.system_settings'))
+
+def is_ip_alive(ip_address):
+    try:
+        ping_command = f"ping -n 1 {ip_address}" if os.name == 'nt' else f"ping -c 1 {ip_address}"
+        response = subprocess.run(ping_command, shell=True, capture_output=True, text=True)
+        return response.returncode == 0
+    except Exception as e:
+        print(f"Error checking IP {ip_address}: {e}")
+        return False
