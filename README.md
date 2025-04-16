@@ -30,3 +30,4 @@ python3 add_user.py
 python3 run.py
 ```
 ![Image](https://rock-technologies.com/Downloads/ABW/Simplenotes/Flask_WEB_GUI_1R.png)
+![Image](https://rock-technologies.com/Downloads/ABW/Simplenotes/SPS_PLC_Settings_2.png)
