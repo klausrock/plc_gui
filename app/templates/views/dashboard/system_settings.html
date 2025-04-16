@@ -101,6 +101,8 @@
                             <td  class="text-center"><i class="bx bxs-circle fs-2 {% if motor.tested %} text-success {% else %} text-danger {% endif %}"></i></td>
                             <td>{{ motor.created_at.strftime('%B %d, %Y, %I:%M %p') }}</td>
                             <td>
+                                <a class="btn btn-success btn-sm waves-effect waves-light" href="#" role="button">Self Test</a>
+
                                 <a class="btn btn-primary btn-sm waves-effect waves-light" href="{{ url_for('dashboard.edit_motor', motor_id=motor.id) }}" role="button">Edit</a>
 
                                 <form action="{{ url_for('dashboard.delete_motor', motor_id=motor.id) }}" method="POST" style="display:inline;" onsubmit="return confirm('Are you sure you want to delete this motor?');">
