@@ -81,10 +81,10 @@
                     <thead>
                     <tr>
                         <th>Engine No.</th>
+                        <th>Model</th>
                         <th>MAC</th>
                         <th>IP</th>
                         <th class="text-center">C</th>
-                        <th>Model</th>
                         <th class="text-center">T</th>
                         <th>Created At</th>
                         <th>Action</th>
@@ -94,10 +94,10 @@
                     {% for motor in motors %}
                         <tr>
                             <th scope="row">{{ motor.engine_number }}</th>
+                            <td>{{ motor.model_number }}</td>
                             <td>{{ motor.mac_address }}</td>
                             <td>{{ motor.ip_address }}</td>
                             <td  class="text-center"><i class="bx bxs-circle fs-2 {% if motor.connected %} text-success {% else %} text-danger {% endif %}"></i></td>
-                            <td>{{ motor.model_number }}</td>
                             <td  class="text-center"><i class="bx bxs-circle fs-2 {% if motor.tested %} text-success {% else %} text-danger {% endif %}"></i></td>
                             <td>{{ motor.created_at.strftime('%B %d, %Y, %I:%M %p') }}</td>
                             <td>
