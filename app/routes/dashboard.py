@@ -1,11 +1,12 @@
 import re
-import subprocess
 import httpx
-import traceback
+# import traceback
+import subprocess
 from flask import Blueprint, render_template, request, jsonify, flash, redirect, url_for
 from flask_login import login_required
 from app.models.stepperMotor import StepperMotor
 from app import os, db
+from app.utils.common import is_ip_alive
 
 bp = Blueprint('dashboard', __name__, url_prefix='')
 
@@ -25,6 +26,7 @@ def system_settings():
             'mac_address': motor.mac_address,
             'ip_address': motor.ip_address,
             'model_number': motor.model_number,
+            'device_id': motor.device_id,
             'connected': motor.connected,
             'tested': motor.tested,
             'created_at': motor.created_at
@@ -120,12 +122,3 @@ def delete_motor(motor_id):
 
     flash(f"Stepper Motor {motor.mac_address} deleted successfully!", 'success')
     return redirect(url_for('dashboard.system_settings'))
-
-def is_ip_alive(ip_address):
-    try:
-        ping_command = f"ping -n 1 {ip_address}" if os.name == 'nt' else f"ping -c 1 {ip_address}"
-        response = subprocess.run(ping_command, shell=True, capture_output=True, text=True)
-        return response.returncode == 0
-    except Exception as e:
-        print(f"Error checking IP {ip_address}: {e}")
-        return False

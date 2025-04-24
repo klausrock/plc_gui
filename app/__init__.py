@@ -21,10 +21,11 @@ def create_app():
     # Redirect unauthorized users to the login page
     login_manager.login_view = "auth.login"
 
-    from app.routes import auth, dashboard
+    from app.routes import auth, dashboard, api
 
     app.register_blueprint(auth.bp)
     app.register_blueprint(dashboard.bp)
+    app.register_blueprint(api.bp)
 
     # Create tables
     with app.app_context():

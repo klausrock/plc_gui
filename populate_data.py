@@ -20,13 +20,13 @@ with app.app_context():
     # Adding motors
     test_motors = [
         StepperMotor(engine_number=1, mac_address='AA-BB-CC-DD-EE-01', ip_address='192.168.1.101',
-                     model_number='PD4-E601L42-E-65-3A', connected=True, tested=True),
+                     model_number='PD4-E601L42-E-65-3A', device_id='', connected=True, tested=True),
         StepperMotor(engine_number=2, mac_address='AA-BB-CC-DD-EE-02', ip_address='192.168.1.102',
-                     model_number='PD4-E601L42-E-65-3A', connected=True, tested=False),
-        StepperMotor(engine_number=3, mac_address='AA-BB-CC-DD-EE-03', ip_address='192.168.1.103', model_number=None,
-                     connected=False, tested=False),
+                     model_number='PD4-E601L42-E-65-3A', device_id='', connected=True, tested=False),
+        StepperMotor(engine_number=3, mac_address='AA-BB-CC-DD-EE-03', ip_address='192.168.1.103',
+                     model_number='', device_id='', connected=False, tested=False),
         StepperMotor(engine_number=4, mac_address='AA-BB-CC-DD-EE-04', ip_address='192.168.1.104',
-                     model_number='PD4-E601L42-E-65-3A', connected=True, tested=True),
+                     model_number='PD4-E601L42-E-65-3A', device_id='', connected=True, tested=True),
     ]
 
     add_users(test_users)

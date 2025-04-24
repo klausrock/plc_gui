@@ -69,7 +69,7 @@
         </div>
 
         <div class="col-md-3">
-            <input type="text" class="form-control" aria-label="IP Address" id="ip" placeholder="IP Address" readonly>
+            <input type="text" class="form-control" aria-label="Result" id="scanResult" placeholder="Result" readonly>
         </div>
 
     </div>
@@ -82,11 +82,13 @@
                     <tr>
                         <th>Engine No.</th>
                         <th>Model</th>
+                        <th>Device Id</th>
                         <th>MAC</th>
                         <th>IP</th>
                         <th class="text-center">C</th>
                         <th class="text-center">T</th>
                         <th>Created At</th>
+                        <th>API Test</th>
                         <th>Action</th>
                     </tr>
                     </thead>
@@ -95,11 +97,44 @@
                         <tr>
                             <th scope="row">{{ motor.engine_number }}</th>
                             <td>{{ motor.model_number }}</td>
+                            <td>{{ motor.device_id }}</td>
                             <td>{{ motor.mac_address }}</td>
                             <td>{{ motor.ip_address }}</td>
                             <td  class="text-center"><i class="bx bxs-circle fs-2 {% if motor.connected %} text-success {% else %} text-danger {% endif %}"></i></td>
                             <td  class="text-center"><i class="bx bxs-circle fs-2 {% if motor.tested %} text-success {% else %} text-danger {% endif %}"></i></td>
                             <td>{{ motor.created_at.strftime('%B %d, %Y, %I:%M %p') }}</td>
+                            <td>
+                                {#                                <div class="btn-group" role="group">#}
+                                {#                                                    <button id="btnGroupDrop1" type="button" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">#}
+                                {#                                                        Dropdown <i class="mdi mdi-chevron-down"></i>#}
+                                {#                                                    </button>#}
+                                {#                                                    <ul class="dropdown-menu" aria-labelledby="btnGroupDrop1" style="">#}
+                                {#                                                        <li><a class="dropdown-item" href="#">Dropdown link</a></li>#}
+                                {#                                                        <li><a class="dropdown-item" href="#">Dropdown link</a></li>#}
+                                {#                                                    </ul>#}
+                                {#                                                </div>#}
+
+
+
+
+
+
+
+
+
+                                <div class="dropdown">
+                                    <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="bx bx-dots-horizontal-rounded"></i>
+                                    </button>
+                                    <ul class="dropdown-menu dropdown-menu-end" style="">
+                                        <li>
+                                            <a class="dropdown-item" href="#" data-ip="{{ motor.ip_address }}" onclick="getDeviceId(this)">
+                                                Find Device ID
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
                             <td>
                                 <a class="btn btn-success btn-sm waves-effect waves-light" href="#" role="button">Self Test</a>
 
@@ -160,8 +195,8 @@
                 const data = await response.json();
 
                 if (data.ip) {
-                    document.getElementById('ip').value = data.ip;
-                    document.getElementById('ip').style.backgroundColor = '#2AB57D';
+                    document.getElementById('scanResult').value = data.ip;
+                    document.getElementById('scanResult').style.backgroundColor = '#2AB57D';
 
                     progressBar.innerText = 'IP Found!';
                     progressBar.style.width = '100%';
@@ -172,8 +207,8 @@
                     }, 1500);
 
                 } else {
-                    document.getElementById('ip').value = "IP Not Found";
-                    document.getElementById('ip').style.backgroundColor = '#FD625E';
+                    document.getElementById('scanResult').value = "IP Not Found";
+                    document.getElementById('scanResult').style.backgroundColor = '#FD625E';
 
                     progressBar.innerText = 'IP Not Found';
                     progressBar.style.width = '100%';
@@ -190,6 +225,76 @@
                 // Revert button state
                 findBtn.innerText = 'Find & Save IP';
                 findBtn.disabled = false;
+
+                // Hide progress bar after 2 seconds
+                setTimeout(() => {
+                    progressContainer.style.display = 'none';
+                    progressBar.classList.remove('bg-success', 'bg-danger');
+                }, 2000);
+            }
+        }
+
+        async function getDeviceId(element) {
+            const ip = element.getAttribute("data-ip");
+            console.log(ip);
+
+            const progressBar = document.getElementById('progressBar');
+            const progressContainer = document.getElementById('progressContainer');
+
+            // Show Progress Bar and Reset
+            progressContainer.style.display = 'block';
+            progressBar.style.width = '0%';
+            progressBar.innerText = 'Scanning...';
+
+
+            let progress = 0;
+            // Simulate Progress Bar Animation
+            const progressInterval = setInterval(() => {
+                if (progress < 90) {  // Increase progress bar up to 90% before waiting for the real response
+                    progress += 10;
+                    progressBar.style.width = progress + '%';
+                }
+            }, 300);
+
+            try {
+
+                const response = await fetch(`api/device-id/${ip}`, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                    }
+                });
+
+                const data = response.json();
+
+                if (data.device_id) {
+                    document.getElementById('scanResult').value = data.device_id;
+                    document.getElementById('scanResult').style.backgroundColor = '#2AB57D';
+
+                    progressBar.innerText = 'Device Id Found!';
+                    progressBar.style.width = '100%';
+                    progressBar.classList.add('bg-success');
+
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1500);
+
+                } else {
+                    document.getElementById('scanResult').value = "Device Id Not Found";
+                    document.getElementById('scanResult').style.backgroundColor = '#FD625E';
+
+                    progressBar.innerText = 'Device Id Not Found';
+                    progressBar.style.width = '100%';
+                    progressBar.classList.add('bg-danger');
+                }
+
+            } catch (error) {
+                console.error('Error:', error)
+                progressBar.innerText = 'Error Occurred';
+                progressBar.style.width = '100%';
+                progressBar.classList.add('bg-danger');
+            } finally {
+                clearInterval(progressInterval);
 
                 // Hide progress bar after 2 seconds
                 setTimeout(() => {
