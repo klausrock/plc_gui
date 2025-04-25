@@ -16,8 +16,8 @@ def get_device_id(ip):
         if not ip_address:
             return jsonify({'error': 'ip_address required'}), 400
 
-        if is_ip_alive(ip_address):
-            return jsonify({"error": f"IP {ip_address} is not reachable"}), 404
+        # if is_ip_alive(ip_address):
+        #     return jsonify({"error": f"IP {ip_address} is not reachable"}), 404
 
         device_id = fetch_device_id_from_ip(ip_address)
         if not device_id:
