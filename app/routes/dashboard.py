@@ -6,7 +6,7 @@ from flask import Blueprint, render_template, request, jsonify, flash, redirect,
 from flask_login import login_required
 from app.models.stepperMotor import StepperMotor
 from app import os, db
-from app.utils.common import is_ip_alive
+from app.utils.common import is_ip_alive, format_mac
 
 bp = Blueprint('dashboard', __name__, url_prefix='')
 
@@ -27,6 +27,7 @@ def system_settings():
             'ip_address': motor.ip_address,
             'model_number': motor.model_number,
             'device_id': motor.device_id,
+            'software_version': motor.software_version,
             'connected': motor.connected,
             'tested': motor.tested,
             'created_at': motor.created_at
@@ -71,7 +72,8 @@ def ping_mac():
                 model_number = 'api no response'
 
             # Step 2: Create or update motor entry
-            motor = StepperMotor.query.filter_by(mac_address=mac_address).first()
+            formated_mac_address = format_mac(mac_address)
+            motor = StepperMotor.query.filter_by(mac_address=formated_mac_address).first()
             if motor:
                 motor.ip_address = ip_address
                 motor.connected = True
@@ -82,7 +84,7 @@ def ping_mac():
                 next_engine_number = (int(last_motor.engine_number) + 1) if last_motor else 1
                 motor = StepperMotor(
                     engine_number=next_engine_number,
-                    mac_address=mac_address,
+                    mac_address=formated_mac_address,
                     ip_address=ip_address,
                     connected=True,
                     model_number=model_number,

@@ -83,6 +83,7 @@
                         <th>Engine No.</th>
                         <th>Model</th>
                         <th>Device Id</th>
+                        <th>Software Version</th>
                         <th>MAC</th>
                         <th>IP</th>
                         <th class="text-center">C</th>
@@ -98,6 +99,7 @@
                             <th scope="row">{{ motor.engine_number }}</th>
                             <td>{{ motor.model_number }}</td>
                             <td>{{ motor.device_id }}</td>
+                            <td>{{ motor.software_version }}</td>
                             <td>{{ motor.mac_address }}</td>
                             <td>{{ motor.ip_address }}</td>
                             <td  class="text-center"><i class="bx bxs-circle fs-2 {% if motor.connected %} text-success {% else %} text-danger {% endif %}"></i></td>

@@ -9,3 +9,9 @@ def is_ip_alive(ip_address):
     except Exception as e:
         print(f"Error checking IP {ip_address}: {e}")
         return False
+
+def format_mac(mac):
+    # Remove any existing separators and make uppercase
+    mac = mac.upper().replace(":", "").replace("-", "")
+    # Insert hyphens every 2 characters
+    return '-'.join(mac[i:i+2] for i in range(0, len(mac), 2))

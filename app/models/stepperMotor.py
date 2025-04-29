@@ -9,6 +9,7 @@ class StepperMotor(db.Model):
     ip_address = db.Column(db.String(45), nullable=False, unique=True, index=True)
     model_number = db.Column(db.String(120), nullable=True)
     device_id = db.Column(db.String(120), nullable=True)
+    software_version = db.Column(db.String(120), nullable=True)
     connected = db.Column(db.Boolean, nullable=True, default=False)
     tested = db.Column(db.Boolean, nullable=True, default=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
