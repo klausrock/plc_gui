@@ -1,0 +1,126 @@
+{% extends 'layouts/app.html' %}
+
+{% block title %}API's{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title">API's</h4>
+                    <p class="card-title-desc">
+                        Engine Number: <code>{{ motor.engine_number }}</code> |
+                        Model Number: <code>{{ motor.model_number }}</code> |
+                        MAC Address: <code>{{ motor.mac_address }}</code>
+                    </p>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="progress mb-3" style="height: 20px; display: none;" id="progressContainer">
+                        <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width: 0%;" id="progressBar">Scanning...</div>
+                    </div>
+
+                    <div class="mb-3">
+                        <input type="text" class="form-control" aria-label="Result" id="scanResult" placeholder="Result" readonly>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered mb-4">
+                            <thead>
+                            <tr>
+                                <th>Sl</th>
+                                <th>Name</th>
+                                <th>Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>Device ID</td>
+                                <td>
+                                    <a class="btn btn-primary btn-sm waves-effect waves-light" href="#" data-ip="{{ motor.ip_address }}" onclick="getDeviceId(this)">Check</a>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block script %}
+    <script>
+        async function getDeviceId(element) {
+            const ip = element.getAttribute("data-ip");
+            console.log(ip);
+
+            const progressBar = document.getElementById('progressBar');
+            const progressContainer = document.getElementById('progressContainer');
+
+            // Show Progress Bar and Reset
+            progressContainer.style.display = 'block';
+            progressBar.style.width = '0%';
+            progressBar.innerText = 'Scanning...';
+
+
+            let progress = 0;
+            // Simulate Progress Bar Animation
+            const progressInterval = setInterval(() => {
+                if (progress < 90) {  // Increase progress bar up to 90% before waiting for the real response
+                    progress += 10;
+                    progressBar.style.width = progress + '%';
+                }
+            }, 300);
+
+            try {
+
+                const response = await fetch(`/api/device-id/${ip}`, {
+                    method: 'GET',
+                    headers: {
+                        'Accept': 'application/json',
+                    }
+                });
+
+                const data = await response.json();
+
+                if (data.device_id) {
+                    document.getElementById('scanResult').value = data.device_id;
+                    document.getElementById('scanResult').style.backgroundColor = '#2AB57D';
+
+                    progressBar.innerText = 'Device Id Found!';
+                    progressBar.style.width = '100%';
+                    progressBar.classList.add('bg-success');
+
+                    setTimeout(() => {
+                        window.location.reload();
+                    }, 1500);
+
+                } else {
+                    document.getElementById('scanResult').value = "Device Id Not Found";
+                    document.getElementById('scanResult').style.backgroundColor = '#FD625E';
+
+                    progressBar.innerText = 'Device Id Not Found';
+                    progressBar.style.width = '100%';
+                    progressBar.classList.add('bg-danger');
+                }
+
+            } catch (error) {
+                console.error('Error:', error)
+                progressBar.innerText = 'Error Occurred';
+                progressBar.style.width = '100%';
+                progressBar.classList.add('bg-danger');
+            } finally {
+                clearInterval(progressInterval);
+
+                // Hide progress bar after 2 seconds
+                setTimeout(() => {
+                    progressContainer.style.display = 'none';
+                    progressBar.classList.remove('bg-success', 'bg-danger');
+                }, 2000);
+            }
+        }
+    </script>
+{% endblock %}

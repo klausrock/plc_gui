@@ -1,11 +1,17 @@
 import httpx
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, render_template
 from flask_login import login_required
 from app.models.stepperMotor import StepperMotor
 from app import os, db
-from app.utils.common import is_ip_alive
+# from app.utils.common import is_ip_alive
 
 bp = Blueprint('api', __name__, url_prefix='/api')
+
+@bp.route('/list/<int:motor_id>')
+@login_required
+def api_list(motor_id):
+    motor = StepperMotor.query.get_or_404(motor_id)
+    return render_template('views/api_list.html', motor=motor)
 
 @bp.route('/device-id/<string:ip>', methods=['GET'])
 @login_required

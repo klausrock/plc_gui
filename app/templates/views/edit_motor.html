@@ -27,6 +27,20 @@
                         </div>
 
                         <div class="row mb-4">
+                            <label for="device_id" class="col-sm-3 col-form-label">Device Id</label>
+                            <div class="col-sm-9">
+                                <input type="text" disabled class="form-control" id="device_id" value="{{ motor.device_id }}">
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <label for="software_version" class="col-sm-3 col-form-label">Software Version</label>
+                            <div class="col-sm-9">
+                                <input type="text" disabled class="form-control" id="software_version" value="{{ motor.software_version }}">
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
                             <label for="connected" class="col-sm-3 col-form-label">Connected</label>
                             <div class="col-sm-9">
                                 <i class="bx bxs-circle fs-2 {% if motor.connected %} text-success {% else %} text-danger {% endif %}"></i>
@@ -56,8 +70,13 @@
 
                         <div class="row justify-content-end">
                             <div class="col-sm-9">
-                                <div>
-                                    <button type="submit" class="btn btn-primary w-md">Update</button>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button type="submit" class="btn btn-primary w-md">Update</button>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <a href="{{ url_for('dashboard.system_settings') }}" class="btn btn-info w-md float-end">Back</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>

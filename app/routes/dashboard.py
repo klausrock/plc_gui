@@ -13,7 +13,7 @@ bp = Blueprint('dashboard', __name__, url_prefix='')
 @bp.route('/dashboard')
 @login_required
 def dashboard():
-    return render_template('views/dashboard/index.html')
+    return render_template('views/index.html')
 
 @bp.route('system-settings')
 @login_required
@@ -26,14 +26,13 @@ def system_settings():
             'mac_address': motor.mac_address,
             'ip_address': motor.ip_address,
             'model_number': motor.model_number,
-            'device_id': motor.device_id,
-            'software_version': motor.software_version,
             'connected': motor.connected,
             'tested': motor.tested,
-            'created_at': motor.created_at
+            'created_at': motor.created_at,
+            'updated_at': motor.updated_at
         } for motor in motors
     ]
-    return render_template('views/dashboard/system_settings.html', motors=motors_list)
+    return render_template('views/system_settings.html', motors=motors_list)
 
 @bp.route('ping_mac', methods=['POST'])
 @login_required
@@ -103,7 +102,7 @@ def ping_mac():
 @login_required
 def edit_motor(motor_id):
     motor = StepperMotor.query.get_or_404(motor_id)
-    return render_template('views/dashboard/edit_motor.html', motor=motor)
+    return render_template('views/edit_motor.html', motor=motor)
 
 @bp.route('/update/<int:motor_id>', methods=['POST'])
 @login_required
