@@ -101,8 +101,8 @@
                             <td>{{ motor.ip_address }}</td>
                             <td  class="text-center"><i class="bx bxs-circle fs-2 {% if motor.connected %} text-success {% else %} text-danger {% endif %}"></i></td>
                             <td  class="text-center"><i class="bx bxs-circle fs-2 {% if motor.tested %} text-success {% else %} text-danger {% endif %}"></i></td>
-                            <td>{{ motor.created_at.strftime('%B %d, %Y, %I:%M %p') }}</td>
-                            <td>{{ motor.updated_at.strftime('%B %d, %Y, %I:%M %p') }}</td>
+                            <td>{{ motor.created_at.strftime('%d/%m/%Y') }}</td>
+                            <td>{{ motor.updated_at.strftime('%d/%m/%Y') }}</td>
 {#                            <td>#}
 {#                                <div class="dropdown">#}
 {#                                    <button class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">#}
